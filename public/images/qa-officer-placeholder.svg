@@ -1,0 +1,7 @@
+<svg width="640" height="720" viewBox="0 0 640 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="720" rx="24" fill="#145B3A"/>
+  <circle cx="320" cy="236" r="104" fill="#CBAA46"/>
+  <path d="M162 574C162 482.873 235.873 409 327 409H313C404.127 409 478 482.873 478 574V648H162V574Z" fill="#F5F5DC"/>
+  <rect x="220" y="120" width="200" height="44" rx="22" fill="#F5F5DC" fill-opacity="0.8"/>
+  <text x="320" y="148" text-anchor="middle" fill="#145B3A" font-family="Arial, sans-serif" font-size="18">QA Officer Photo</text>
+</svg>

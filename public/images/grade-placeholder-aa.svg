@@ -1,0 +1,8 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="28" fill="#F2E7BE"/>
+  <rect x="36" y="34" width="568" height="352" rx="22" fill="#145B3A"/>
+  <ellipse cx="320" cy="220" rx="136" ry="90" fill="#6B3F20"/>
+  <ellipse cx="320" cy="220" rx="74" ry="134" transform="rotate(28 320 220)" fill="#8B572A"/>
+  <text x="320" y="86" text-anchor="middle" fill="#F5F5DC" font-family="Arial, sans-serif" font-size="34" font-weight="700">AA Grade</text>
+  <text x="320" y="344" text-anchor="middle" fill="#CBAA46" font-family="Arial, sans-serif" font-size="20">Image Placeholder</text>
+</svg>
