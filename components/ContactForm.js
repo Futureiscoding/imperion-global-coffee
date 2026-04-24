@@ -1,8 +1,5 @@
 import { useState } from "react";
 
-const salesEmail = "sales@imperionglobalholdings.co.ke";
-const whatsappNumber = "254748167811";
-
 const initialValues = {
   companyName: "",
   contactPerson: "",
@@ -13,37 +10,56 @@ const initialValues = {
   inquiryDetails: "",
 };
 
-const encode = (value) => encodeURIComponent(value);
-
 export default function ContactForm({ title = "Request Samples or Pricing" }) {
   const [values, setValues] = useState(initialValues);
+  const [status, setStatus] = useState({ type: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (name, value) => {
     setValues((current) => ({ ...current, [name]: value }));
   };
 
-  const message = `Imperion Global Holdings Inquiry
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setStatus({ type: "", message: "" });
 
-Company Name: ${values.companyName}
-Contact Person: ${values.contactPerson}
-Email Address: ${values.emailAddress}
-Country / Destination Port: ${values.destination}
-Product Interest: ${values.productInterest}
-Documents Required: ${values.documentsRequired}
-Volume and Sample Request: ${values.inquiryDetails}`;
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: values.contactPerson,
+          email: values.emailAddress,
+          company: values.companyName,
+          country: values.destination,
+          interest: `${values.productInterest} | Documents: ${values.documentsRequired || "None specified"}`,
+          message: values.inquiryDetails,
+          source: "Contact Form",
+        }),
+      });
 
-  const mailtoLink = `mailto:${salesEmail}?subject=${encode("Website Inquiry")}&body=${encode(message)}`;
-  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encode(message)}`;
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Submission failed.");
+      }
+
+      setStatus({ type: "success", message: data.message || "Inquiry sent successfully." });
+      setValues(initialValues);
+    } catch (error) {
+      setStatus({ type: "error", message: error.message || "Email sending failed." });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <form
-      onSubmit={(event) => event.preventDefault()}
-      className="rounded-[2rem] border border-forest/10 bg-white p-8 shadow-soft"
-    >
+    <form onSubmit={handleSubmit} className="rounded-[2rem] border border-forest/10 bg-white p-8 shadow-soft">
       <h2 className="text-2xl font-semibold text-forest">{title}</h2>
       <p className="mt-3 text-sm leading-7 text-ink/75">
-        Share your sourcing needs and required documents. You can send the completed inquiry directly by email
-        or WhatsApp.
+        Share your sourcing needs and required documents. Your inquiry will be sent directly through the website
+        submission system.
       </p>
       <div className="mt-8 grid gap-5 md:grid-cols-2">
         <label className="text-sm font-medium text-ink/80">
@@ -116,22 +132,18 @@ Volume and Sample Request: ${values.inquiryDetails}`;
           />
         </label>
       </div>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        <a
-          href={mailtoLink}
-          className="inline-flex items-center justify-center rounded-full bg-forest px-6 py-3 text-sm font-semibold text-white hover:bg-forest/90"
-        >
-          Send Inquiry by Email
-        </a>
-        <a
-          href={whatsappLink}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center justify-center rounded-full border border-forest/20 px-6 py-3 text-sm font-semibold text-forest hover:border-gold hover:text-gold"
-        >
-          Send Inquiry by WhatsApp
-        </a>
-      </div>
+      {status.message ? (
+        <p className={`mt-5 text-sm ${status.type === "success" ? "text-forest" : "text-red-700"}`}>
+          {status.message}
+        </p>
+      ) : null}
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="mt-6 rounded-full bg-forest px-6 py-3 text-sm font-semibold text-white hover:bg-forest/90 disabled:cursor-not-allowed disabled:opacity-70"
+      >
+        {isSubmitting ? "Sending..." : "Send Inquiry"}
+      </button>
     </form>
   );
 }

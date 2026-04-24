@@ -68,17 +68,6 @@ const initialFormState = {
   message: "",
 };
 
-const salesEmail = "sales@imperionglobalholdings.co.ke";
-const whatsappNumber = "254748167811";
-
-const encode = (value) => encodeURIComponent(value);
-
-const buildMailtoLink = (subject, body) =>
-  `mailto:${salesEmail}?subject=${encode(subject)}&body=${encode(body)}`;
-
-const buildWhatsAppLink = (message) =>
-  `https://wa.me/${whatsappNumber}?text=${encode(message)}`;
-
 function FormField({ field, value, onChange }) {
   if (field.type === "select") {
     return (
@@ -142,6 +131,8 @@ export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(true);
   const [screen, setScreen] = useState("menu");
   const [formValues, setFormValues] = useState(initialFormState);
+  const [status, setStatus] = useState({ type: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFieldChange = (name, value) => {
     setFormValues((current) => ({ ...current, [name]: value }));
@@ -149,62 +140,78 @@ export default function ChatbotWidget() {
 
   const resetToMenu = () => {
     setScreen("menu");
+    setStatus({ type: "", message: "" });
+    setIsSubmitting(false);
   };
 
-  const submitForm = (nextScreen) => {
-    setScreen(nextScreen);
+  const postInquiry = async (payload, nextScreen) => {
+    setIsSubmitting(true);
+    setStatus({ type: "", message: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Submission failed.");
+      }
+
+      setStatus({ type: "success", message: data.message || "Inquiry sent successfully." });
+      setScreen(nextScreen);
+      setFormValues(initialFormState);
+    } catch (error) {
+      setStatus({ type: "error", message: error.message || "Email sending failed." });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const sampleEmailBody = `Coffee Sample Request
+  const handleSampleSubmit = () =>
+    postInquiry(
+      {
+        name: formValues.name,
+        email: formValues.email,
+        company: formValues.company,
+        country: formValues.country,
+        interest: `${formValues.coffeeInterest} | Buyer type: ${formValues.buyerType} | Estimated volume: ${formValues.volume}`,
+        message: `Coffee sample request from ${formValues.name} for ${formValues.coffeeInterest}. Estimated volume: ${formValues.volume}.`,
+        source: "Chatbot - Coffee Samples",
+      },
+      "samplesSubmitted"
+    );
 
-Name: ${formValues.name}
-Company: ${formValues.company}
-Country: ${formValues.country}
-Email: ${formValues.email}
-Buyer Type: ${formValues.buyerType}
-Coffee Interest: ${formValues.coffeeInterest}
-Estimated Volume: ${formValues.volume}`;
+  const handlePricingSubmit = () =>
+    postInquiry(
+      {
+        name: formValues.name || "Pricing Inquiry",
+        email: formValues.email || "not-provided@imperionglobalholdings.co.ke",
+        company: formValues.company,
+        country: formValues.destination,
+        interest: `Grade: ${formValues.grade} | Quantity: ${formValues.quantity} | Incoterm: ${formValues.incoterm}`,
+        message: `Pricing request for ${formValues.grade}. Quantity: ${formValues.quantity}. Destination: ${formValues.destination}. Purchase timeline: ${formValues.timeline}.`,
+        source: "Chatbot - Pricing",
+      },
+      "pricingSubmitted"
+    );
 
-  const pricingEmailBody = `Pricing Request
-
-Grade Required: ${formValues.grade}
-Quantity Required: ${formValues.quantity}
-Destination Country/Port: ${formValues.destination}
-Preferred Incoterm: ${formValues.incoterm}
-Timeline for Purchase: ${formValues.timeline}`;
-
-  const salesEmailBody = `Sales Inquiry
-
-Name: ${formValues.name}
-Company: ${formValues.company}
-Email: ${formValues.email}
-WhatsApp: ${formValues.whatsapp}
-Country: ${formValues.country}
-Message: ${formValues.message}`;
-
-  const sampleWhatsAppMessage = `Hello Imperion Global Holdings. I would like to request coffee samples.
-Name: ${formValues.name}
-Company: ${formValues.company}
-Country: ${formValues.country}
-Email: ${formValues.email}
-Buyer Type: ${formValues.buyerType}
-Coffee Interest: ${formValues.coffeeInterest}
-Estimated Volume: ${formValues.volume}`;
-
-  const pricingWhatsAppMessage = `Hello Imperion Global Holdings. I would like to request pricing.
-Grade Required: ${formValues.grade}
-Quantity Required: ${formValues.quantity}
-Destination Country/Port: ${formValues.destination}
-Preferred Incoterm: ${formValues.incoterm}
-Timeline for Purchase: ${formValues.timeline}`;
-
-  const salesWhatsAppMessage = `Hello Imperion Global Holdings. I would like to speak to sales.
-Name: ${formValues.name}
-Company: ${formValues.company}
-Email: ${formValues.email}
-WhatsApp: ${formValues.whatsapp}
-Country: ${formValues.country}
-Message: ${formValues.message}`;
+  const handleSalesSubmit = () =>
+    postInquiry(
+      {
+        name: formValues.name,
+        email: formValues.email,
+        company: formValues.company,
+        country: formValues.country,
+        interest: `Sales inquiry | WhatsApp: ${formValues.whatsapp || "Not provided"}`,
+        message: formValues.message,
+        source: "Chatbot - Sales",
+      },
+      "salesSubmitted"
+    );
 
   return (
     <div className="fixed bottom-4 right-4 z-[60] w-[calc(100vw-2rem)] max-w-sm sm:bottom-6 sm:right-6">
@@ -257,12 +264,16 @@ Message: ${formValues.message}`;
                     <FormField key={field.name} field={field} value={formValues[field.name]} onChange={handleFieldChange} />
                   ))}
                 </div>
+                {status.message ? (
+                  <p className={`text-sm ${status.type === "success" ? "text-forest" : "text-red-700"}`}>{status.message}</p>
+                ) : null}
                 <button
                   type="button"
-                  onClick={() => submitForm("samplesSubmitted")}
-                  className="w-full rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-forest/90"
+                  onClick={handleSampleSubmit}
+                  disabled={isSubmitting}
+                  className="w-full rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-forest/90 disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  Submit Sample Request
+                  {isSubmitting ? "Sending..." : "Submit Sample Request"}
                 </button>
                 <button type="button" onClick={resetToMenu} className="w-full text-sm font-medium text-forest hover:text-gold">
                   Back to main menu
@@ -275,22 +286,6 @@ Message: ${formValues.message}`;
                 <div className="rounded-[1.5rem] bg-white p-4 text-sm leading-7 text-ink/75">
                   Thank you. Our team will review your request and contact you with available sample options,
                   cupping notes, and shipping details.
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <a
-                    href={buildMailtoLink("Coffee Sample Request", sampleEmailBody)}
-                    className="inline-flex items-center justify-center rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-forest/90"
-                  >
-                    Send by Email
-                  </a>
-                  <a
-                    href={buildWhatsAppLink(sampleWhatsAppMessage)}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border border-forest/20 px-5 py-3 text-sm font-semibold text-forest hover:border-gold hover:text-gold"
-                  >
-                    Send by WhatsApp
-                  </a>
                 </div>
                 <button type="button" onClick={resetToMenu} className="w-full rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-forest/90">
                   Return to Main Menu
@@ -326,12 +321,16 @@ Message: ${formValues.message}`;
                     <FormField key={field.name} field={field} value={formValues[field.name]} onChange={handleFieldChange} />
                   ))}
                 </div>
+                {status.message ? (
+                  <p className={`text-sm ${status.type === "success" ? "text-forest" : "text-red-700"}`}>{status.message}</p>
+                ) : null}
                 <button
                   type="button"
-                  onClick={() => submitForm("pricingSubmitted")}
-                  className="w-full rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-forest/90"
+                  onClick={handlePricingSubmit}
+                  disabled={isSubmitting}
+                  className="w-full rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-forest/90 disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  Request Pricing
+                  {isSubmitting ? "Sending..." : "Request Pricing"}
                 </button>
                 <button type="button" onClick={resetToMenu} className="w-full text-sm font-medium text-forest hover:text-gold">
                   Back to main menu
@@ -343,22 +342,6 @@ Message: ${formValues.message}`;
               <div className="space-y-4">
                 <div className="rounded-[1.5rem] bg-white p-4 text-sm leading-7 text-ink/75">
                   Thank you. We will prepare pricing based on your requirements.
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <a
-                    href={buildMailtoLink("Pricing Request", pricingEmailBody)}
-                    className="inline-flex items-center justify-center rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-forest/90"
-                  >
-                    Send by Email
-                  </a>
-                  <a
-                    href={buildWhatsAppLink(pricingWhatsAppMessage)}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border border-forest/20 px-5 py-3 text-sm font-semibold text-forest hover:border-gold hover:text-gold"
-                  >
-                    Send by WhatsApp
-                  </a>
                 </div>
                 <button type="button" onClick={resetToMenu} className="w-full rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-forest/90">
                   Return to Main Menu
@@ -421,12 +404,16 @@ Message: ${formValues.message}`;
                     <FormField key={field.name} field={field} value={formValues[field.name]} onChange={handleFieldChange} />
                   ))}
                 </div>
+                {status.message ? (
+                  <p className={`text-sm ${status.type === "success" ? "text-forest" : "text-red-700"}`}>{status.message}</p>
+                ) : null}
                 <button
                   type="button"
-                  onClick={() => submitForm("salesSubmitted")}
-                  className="w-full rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-forest/90"
+                  onClick={handleSalesSubmit}
+                  disabled={isSubmitting}
+                  className="w-full rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-forest/90 disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  Send to Sales
+                  {isSubmitting ? "Sending..." : "Send to Sales"}
                 </button>
                 <button type="button" onClick={resetToMenu} className="w-full text-sm font-medium text-forest hover:text-gold">
                   Back to main menu
@@ -439,22 +426,6 @@ Message: ${formValues.message}`;
                 <div className="rounded-[1.5rem] bg-white p-4 text-sm leading-7 text-ink/75">
                   Thank you for contacting Imperion Global Holdings. We have received your inquiry and will respond
                   shortly with the next steps.
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <a
-                    href={buildMailtoLink("Sales Inquiry", salesEmailBody)}
-                    className="inline-flex items-center justify-center rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-forest/90"
-                  >
-                    Send by Email
-                  </a>
-                  <a
-                    href={buildWhatsAppLink(salesWhatsAppMessage)}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border border-forest/20 px-5 py-3 text-sm font-semibold text-forest hover:border-gold hover:text-gold"
-                  >
-                    Send by WhatsApp
-                  </a>
                 </div>
                 <button type="button" onClick={resetToMenu} className="w-full rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-forest/90">
                   Return to Main Menu

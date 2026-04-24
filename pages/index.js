@@ -91,7 +91,7 @@ export default function HomePage() {
                 Request a Quote
               </Link>
               <a
-                href="/spec-sheet-template.pdf"
+                href="/company-profile.pdf"
                 className="inline-flex items-center justify-center rounded-full border border-white/35 px-6 py-3 text-sm font-semibold text-white hover:border-gold hover:text-gold"
               >
                 Download Company Profile
