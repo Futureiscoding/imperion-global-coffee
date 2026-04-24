@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ChatbotWidget from "@/components/ChatbotWidget";
 
 const navigation = [
   { href: "/", label: "Home" },
@@ -81,6 +82,7 @@ export default function Layout({ children }) {
       </header>
 
       <main>{children}</main>
+      <ChatbotWidget />
 
       <footer className="border-t border-forest/10 bg-white/70">
         <div className="mx-auto grid max-w-7xl gap-8 px-6 py-12 md:grid-cols-2 xl:grid-cols-4">
