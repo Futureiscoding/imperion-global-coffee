@@ -7,10 +7,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        forest: "#145B3A",
-        gold: "#CBAA46",
-        beige: "#F5F5DC",
-        ink: "#1F2937",
+        forest: "#0E4F36",
+        gold: "#D4AF37",
+        beige: "#F7F1E3",
+        ink: "#1F2933",
       },
       fontFamily: {
         sans: ["Inter", "Roboto", "ui-sans-serif", "system-ui", "sans-serif"],
