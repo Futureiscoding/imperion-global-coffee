@@ -4,11 +4,10 @@ import ChatbotWidget from "@/components/ChatbotWidget";
 const navigation = [
   { href: "/", label: "Home" },
   { href: "/coffee", label: "Coffee" },
-  { href: "/coffee/lots", label: "Lots" },
-  { href: "/quality-assurance", label: "Quality" },
+  { href: "/buyers", label: "Media" },
+  { href: "/about", label: "About" },
   { href: "/avocado", label: "Avocado" },
   { href: "/macadamia", label: "Macadamia" },
-  { href: "/about", label: "About" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
@@ -62,7 +61,7 @@ export default function Layout({ children }) {
               <img src="/logo.png" alt="Imperion Global Holdings logo" className="h-11 w-11 rounded-full object-cover" />
               <span>Imperion Global Holdings</span>
             </Link>
-            <p className="text-sm text-ink/70">Traceable Kenyan Coffee. Measurable Quality. Reliable Export Supply.</p>
+            <p className="text-sm text-ink/70">Traceable Origin. Measurable Quality. Reliable Global Supply.</p>
           </div>
           <nav className="flex flex-wrap gap-2 text-sm font-medium">
             {navigation.map((item) => (
@@ -90,8 +89,8 @@ export default function Layout({ children }) {
           <div>
             <h2 className="text-lg font-semibold text-forest">Imperion Global Holdings Limited</h2>
             <p className="mt-3 text-sm leading-6 text-ink/75">
-              Coffee-first agricultural exports with transparent sourcing, quality assurance, and export documentation
-              support for serious international buyers.
+              Buyer-focused agricultural exports with transparent sourcing, quality assurance, and export
+              documentation support.
             </p>
             <p className="mt-4 text-sm leading-6 text-ink/75">
               Main Office: Ruiru, Kiambu County

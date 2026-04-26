@@ -1,6 +1,5 @@
 import ContactForm from "@/components/ContactForm";
 import Seo from "@/components/Seo";
-import SamplePolicy from "@/components/SamplePolicy";
 
 const socialLinks = [
   {
@@ -54,8 +53,8 @@ export default function ContactPage() {
   return (
     <>
       <Seo
-        title="Buyer Inquiry | Imperion Global Holdings"
-        description="Send a buyer-focused inquiry for Kenyan coffee samples, available lots, pricing, and export quotation details."
+        title="Contact Imperion Global Holdings | Send Inquiry"
+        description="Contact Imperion Global Holdings Limited for export inquiries, samples, pricing discussions, and buyer support."
       />
 
       <section className="mx-auto max-w-7xl px-6 py-16">
@@ -63,11 +62,11 @@ export default function ContactPage() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-gold">Contact</p>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight text-forest md:text-5xl">
-              Request coffee details, samples, or quotation information.
+              Reach the Imperion Global Holdings team directly.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-ink/75">
-              Share your buyer profile, grade needs, target bag count, and preferred Incoterm so our export team can
-              respond with the right coffee lot details and next steps.
+              Share your sourcing needs, request pricing, or book a call to discuss coffee, avocado, and
+              macadamia export opportunities from Kenya.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
@@ -75,7 +74,7 @@ export default function ContactPage() {
                 href="#inquiry-form"
                 className="inline-flex items-center justify-center rounded-full bg-forest px-6 py-3 text-sm font-semibold text-white shadow-soft hover:bg-forest/90"
               >
-                Send Buyer Inquiry
+                Send Inquiry Form
               </a>
               <a
                 href="tel:+254748167811"
@@ -151,12 +150,9 @@ export default function ContactPage() {
           </div>
 
           <div id="inquiry-form">
-            <ContactForm title="Buyer Inquiry Form" />
+            <ContactForm title="Send Inquiry Form" />
           </div>
         </div>
-      </section>
-      <section className="mx-auto max-w-7xl px-6 pb-16">
-        <SamplePolicy compact />
       </section>
     </>
   );
