@@ -356,6 +356,7 @@ export default function ChatbotWidget() {
                   <div className="mt-3">
                     <a
                       href="/company-profile.pdf"
+                      download
                       className="inline-flex rounded-full bg-gold px-4 py-2 font-semibold text-forest hover:bg-gold/90"
                     >
                       Download Company Profile

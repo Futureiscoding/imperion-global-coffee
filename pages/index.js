@@ -39,9 +39,9 @@ const sampleDetails = [
 ];
 
 const tradeAssets = [
-  { label: "Company Profile PDF", href: "/company-profile.pdf" },
-  { label: "Coffee Spec Sheet", href: "/spec-sheet-template.pdf" },
-  { label: "Buyer Inquiry Form", href: "/contact" },
+  { label: "Company Profile PDF", href: "/company-profile.pdf", download: true },
+  { label: "Coffee Spec Sheet", href: "/spec-sheet-template.pdf", download: true },
+  { label: "Buyer Inquiry Form", href: "/contact", download: false },
 ];
 
 export default function HomePage() {
@@ -82,7 +82,7 @@ export default function HomePage() {
               <Link href="/coffee/catalog" className="inline-flex items-center justify-center rounded-full border border-white/35 px-6 py-3 text-sm font-semibold text-white hover:border-gold hover:text-gold">
                 View Available Lots
               </Link>
-              <a href="/company-profile.pdf" className="inline-flex items-center justify-center rounded-full border border-white/35 px-6 py-3 text-sm font-semibold text-white hover:border-gold hover:text-gold">
+              <a href="/company-profile.pdf" download className="inline-flex items-center justify-center rounded-full border border-white/35 px-6 py-3 text-sm font-semibold text-white hover:border-gold hover:text-gold">
                 Download Company Profile
               </a>
             </div>
@@ -167,15 +167,26 @@ export default function HomePage() {
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Trade Assets</p>
           <h2 className="mt-3 text-2xl font-semibold">Downloadable buyer documents.</h2>
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {tradeAssets.map((asset) => (
-              <Link
-                key={asset.label}
-                href={asset.href}
-                className="inline-flex min-h-16 items-center justify-center rounded-full border border-white/20 px-4 py-3 text-center text-sm font-semibold text-white hover:border-gold hover:text-gold"
-              >
-                {asset.label}
-              </Link>
-            ))}
+            {tradeAssets.map((asset) =>
+              asset.download ? (
+                <a
+                  key={asset.label}
+                  href={asset.href}
+                  download
+                  className="inline-flex min-h-16 items-center justify-center rounded-full border border-white/20 px-4 py-3 text-center text-sm font-semibold text-white hover:border-gold hover:text-gold"
+                >
+                  {asset.label}
+                </a>
+              ) : (
+                <Link
+                  key={asset.label}
+                  href={asset.href}
+                  className="inline-flex min-h-16 items-center justify-center rounded-full border border-white/20 px-4 py-3 text-center text-sm font-semibold text-white hover:border-gold hover:text-gold"
+                >
+                  {asset.label}
+                </Link>
+              )
+            )}
           </div>
         </div>
       </section>
