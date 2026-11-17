@@ -2,6 +2,12 @@ import Link from "next/link";
 
 const tradeAssets = [
   {
+    label: "Kenya Coffee Sourcing Guide PDF",
+    href: "/images/Kenya-Coffee-Sourcing-Guide.pdf",
+    status: "Download the sourcing guide",
+    download: true,
+  },
+  {
     label: "Company Profile PDF",
     href: "/company-profile.pdf",
     status: "Ready for download",
