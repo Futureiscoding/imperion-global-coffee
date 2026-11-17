@@ -12,8 +12,8 @@ export default function CoffeeVarietiesPage() {
       <section className="mx-auto max-w-7xl px-6 py-16">
         <SectionIntro
           eyebrow="Varieties & Microlots"
-          title="Sample lot visibility for buyers evaluating profile, process, and quality fit."
-          body="The table below includes six placeholder entries that can be replaced with live inventory from your master document. It is structured to support roaster, importer, and trading desk review."
+          title="Lot visibility for buyers evaluating profile, process, and quality fit."
+          body="This lot visibility table is designed to help roasters, importers, and green coffee buyers quickly evaluate origin, process, screen size, moisture, cup profile, and availability before requesting samples or commercial quotations."
         />
         <div className="mt-10">
           <VarietiesTable />

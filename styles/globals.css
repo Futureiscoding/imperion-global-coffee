@@ -1,6 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --forest: #145b3a;
+  --darkgreen: #0e4f36;
+  --gold: #d4af37;
+  --ivory: #f7f3ea;
+  --beige: #f4f1e8;
+  --ink: #1e2a2b;
+  --card: #ffffff;
+}
 
 html {
   scroll-behavior: smooth;
@@ -8,6 +20,12 @@ html {
 
 body {
   @apply bg-beige text-ink font-sans antialiased;
+  line-height: 1.7;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 a {
@@ -15,5 +33,48 @@ a {
 }
 
 ::selection {
-  background: rgba(203, 170, 70, 0.3);
+  background: rgba(212, 175, 55, 0.34);
+}
+
+@layer components {
+  .container-shell {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-label {
+    @apply text-xs font-extrabold uppercase tracking-[0.2em] text-gold;
+  }
+
+  .section-title {
+    @apply mt-4 font-serif text-4xl font-semibold leading-none tracking-tight text-forest md:text-5xl;
+  }
+
+  .section-copy {
+    @apply mt-5 max-w-3xl text-base leading-8 text-ink/75;
+  }
+
+  .premium-card {
+    @apply overflow-hidden rounded-[1.75rem] border border-forest/10 bg-white shadow-card;
+  }
+
+  .cta-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-gold px-6 py-3 text-sm font-extrabold uppercase tracking-[0.04em] text-darkgreen shadow-soft transition hover:bg-[#c59f25];
+  }
+
+  .cta-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-forest/20 bg-white px-6 py-3 text-sm font-extrabold uppercase tracking-[0.04em] text-forest transition hover:border-gold hover:text-gold;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

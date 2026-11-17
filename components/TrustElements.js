@@ -6,7 +6,7 @@ export default function TrustElements() {
         <h2 className="mt-3 text-3xl font-semibold text-forest">Documentation built for importer due diligence.</h2>
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           {[
-            ["Phytosanitary", "Pre-shipment plant health documentation placeholder."],
+            ["Phytosanitary", "Pre-shipment plant health documentation support."],
             ["Certificate of Origin", "Country-of-origin paperwork for customs and traceability."],
             ["Certificate of Analysis", "Lot-specific moisture, defects, and quality checks."],
           ].map(([title, body]) => (
@@ -22,15 +22,15 @@ export default function TrustElements() {
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Quality Assurance</p>
         <div className="mt-5 overflow-hidden rounded-[1.5rem]">
           <img
-            src="/images/qa-officer-placeholder.svg"
-            alt="Placeholder portrait for Imperion's quality assurance officer"
+            src="/images/qa-officer-profile.svg"
+            alt="Imperion quality assurance profile illustration"
             className="h-auto w-full"
           />
         </div>
         <h3 className="mt-5 text-xl font-semibold text-forest">QA Officer Profile</h3>
         <p className="mt-2 text-sm leading-7 text-ink/75">
-          Placeholder profile: a quality assurance lead overseeing sample review, moisture checks, grading,
-          documentation, and buyer specification matching before shipment.
+          Quality assurance oversight includes sample review, moisture checks, grading, documentation, and buyer
+          specification matching before shipment.
         </p>
       </div>
     </section>

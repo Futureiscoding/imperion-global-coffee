@@ -5,7 +5,7 @@ export default function SpecSheet({ title = "Coffee Spec Sheet Template", descri
       <h3 className="mt-3 text-2xl font-semibold text-forest">{title}</h3>
       <p className="mt-3 max-w-2xl text-sm leading-7 text-ink/75">
         {description ||
-          "Use this placeholder PDF for buyer-facing technical details including moisture, screen size, defect count, crop year, packaging, and shipment readiness."}
+          "Use this PDF for buyer-facing technical details including moisture, screen size, defect count, crop year, packaging, and shipment readiness."}
       </p>
       <a
         href="/spec-sheet-template.pdf"

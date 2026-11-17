@@ -3,10 +3,10 @@ import { useState } from "react";
 const mainMenu = [
   { id: "samples", label: "Request Coffee Samples" },
   { id: "lots", label: "View Current Coffee Lots" },
-  { id: "pricing", label: "Ask About Pricing" },
+  { id: "pricing", label: "Ask About FOB/CIF Pricing" },
   { id: "profile", label: "Download Company Profile" },
-  { id: "logistics", label: "Export & Logistics Info" },
-  { id: "sales", label: "Speak to Sales" },
+  { id: "logistics", label: "Export Documentation Support" },
+  { id: "whatsapp", label: "Speak to Sales on WhatsApp" },
 ];
 
 const sampleFields = [
@@ -24,7 +24,7 @@ const sampleFields = [
     name: "coffeeInterest",
     label: "Coffee interest",
     type: "select",
-    options: ["AA", "AB", "PB", "Microlots"],
+    options: ["AA", "AB", "PB", "C", "Mixed"],
   },
   { name: "volume", label: "Estimated volume", type: "text", placeholder: "e.g. 5 bags / 1 container" },
 ];
@@ -37,7 +37,7 @@ const pricingFields = [
     name: "incoterm",
     label: "Preferred Incoterm",
     type: "select",
-    options: ["FOB", "CIF", "EXW"],
+    options: ["FOB Mombasa", "CIF", "CFR", "EXW/FOT Nairobi"],
   },
   { name: "timeline", label: "Timeline for purchase", type: "text", placeholder: "e.g. within 30 days" },
 ];
@@ -296,11 +296,16 @@ export default function ChatbotWidget() {
             {screen === "lots" && (
               <div className="space-y-4">
                 <div className="rounded-[1.5rem] bg-white p-4 text-sm leading-7 text-ink/75">
-                  Our available lots may include Kenyan AA, AB, PB, washed coffees, natural coffees, and selected microlots.
-                  <p className="mt-3 font-medium text-forest">Would you like to receive the current offer sheet?</p>
+                  Current lot visibility is available online with grade, region, process, moisture, cupping score, packaging, price basis, and status.
+                  <div className="mt-3">
+                    <a href="/coffee/current-lots" className="inline-flex rounded-full bg-gold px-4 py-2 font-semibold text-forest hover:bg-gold/90">
+                      View Current Coffee Lots
+                    </a>
+                  </div>
+                  <p className="mt-4 font-medium text-forest">Would you like to discuss a specific lot?</p>
                 </div>
                 <div className="space-y-3">
-                  <MenuButton onClick={() => setScreen("sales")}>Yes, send offer sheet</MenuButton>
+                  <MenuButton onClick={() => setScreen("sales")}>Ask About This Lot</MenuButton>
                   <MenuButton onClick={() => setScreen("pricing")}>Ask about specific grade</MenuButton>
                   <MenuButton onClick={() => setScreen("sales")}>Speak to sales</MenuButton>
                 </div>
@@ -388,6 +393,26 @@ export default function ChatbotWidget() {
                 <div className="space-y-3">
                   <MenuButton onClick={() => setScreen("sales")}>Yes, speak to sales</MenuButton>
                   <MenuButton onClick={() => setScreen("pricing")}>Request quotation</MenuButton>
+                </div>
+                <button type="button" onClick={resetToMenu} className="w-full text-sm font-medium text-forest hover:text-gold">
+                  Back to main menu
+                </button>
+              </div>
+            )}
+
+            {screen === "whatsapp" && (
+              <div className="space-y-4">
+                <div className="rounded-[1.5rem] bg-white p-4 text-sm leading-7 text-ink/75">
+                  Speak with export sales on WhatsApp for coffee samples, lot status, FOB/CIF quotation support, and
+                  documentation questions.
+                  <div className="mt-3">
+                    <a
+                      href="https://wa.me/254748167811?text=Hello%20Imperion%20Global%20Holdings%2C%20I%20would%20like%20to%20discuss%20Kenyan%20coffee%20sourcing."
+                      className="inline-flex rounded-full bg-gold px-4 py-2 font-semibold text-forest hover:bg-gold/90"
+                    >
+                      Open WhatsApp
+                    </a>
+                  </div>
                 </div>
                 <button type="button" onClick={resetToMenu} className="w-full text-sm font-medium text-forest hover:text-gold">
                   Back to main menu

@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { name, email, company, country, interest, message, source } = req.body;
+  const { name, email, company, country, phone, interest, message, source } = req.body;
 
   if (!name || !email || !message) {
     return res.status(400).json({ message: "Name, email, and message are required." });
@@ -36,15 +36,19 @@ export default async function handler(req, res) {
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Company:</strong> ${company || "Not provided"}</p>
         <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone / WhatsApp:</strong> ${phone || "Not provided"}</p>
         <p><strong>Country:</strong> ${country || "Not provided"}</p>
         <p><strong>Interest:</strong> ${interest || "Not provided"}</p>
         <p><strong>Source:</strong> ${source || "Website Form"}</p>
         <p><strong>Message:</strong></p>
-        <p>${message}</p>
+        <p>${String(message).replace(/\n/g, "<br />")}</p>
       `,
     });
 
-    return res.status(200).json({ message: "Inquiry sent successfully." });
+    return res.status(200).json({
+      message:
+        "Thank you. Your inquiry has been received. Our team will review your requirements and respond with the most relevant next steps.",
+    });
   } catch (error) {
     return res.status(500).json({ message: "Email sending failed." });
   }

@@ -49,7 +49,7 @@ export default function HeroSection({
             </div>
             <div>
               <p className="text-3xl font-semibold text-forest">3</p>
-              <p className="mt-1 text-sm text-ink/70">Core certificate placeholders for compliance workflows</p>
+              <p className="mt-1 text-sm text-ink/70">Core export documents for compliance workflows</p>
             </div>
             <div>
               <p className="text-3xl font-semibold text-forest">72h</p>

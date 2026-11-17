@@ -39,11 +39,11 @@ const socialLinks = [
     ),
   },
   {
-    label: "TikTok",
-    href: "#",
+    label: "Email",
+    href: "mailto:sales@imperionglobalholdings.co.ke",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5 fill-current">
-        <path d="M15.86 3c.18 1.53 1.05 3 2.64 3.93A5.9 5.9 0 0 0 22 7.7v2.77a8.8 8.8 0 0 1-3.86-.91v5.33c0 3.42-2.76 6.11-6.25 6.11a6.18 6.18 0 0 1-4.1-1.53A5.94 5.94 0 0 1 5.86 15c0-3.42 2.76-6.11 6.25-6.11.29 0 .57.02.84.07v2.93a3.2 3.2 0 0 0-.84-.11c-1.77 0-3.2 1.36-3.2 3.05 0 1.03.53 1.94 1.34 2.5.52.36 1.15.56 1.86.56 1.77 0 3.2-1.36 3.2-3.06V3h2.55Z" />
+        <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm8 8.2L4.8 7H4v.6l8 6.9 8-6.9V7h-.8L12 13.2Z" />
       </svg>
     ),
   },
@@ -53,8 +53,8 @@ export default function ContactPage() {
   return (
     <>
       <Seo
-        title="Contact Imperion Global Holdings | Send Inquiry"
-        description="Contact Imperion Global Holdings Limited for export inquiries, samples, pricing discussions, and buyer support."
+        title="Contact Imperion Global Holdings | Coffee Export Inquiry"
+        description="Contact Imperion Global Holdings Limited to request Kenyan coffee samples, quotations, export documents, or buyer support."
       />
 
       <section className="mx-auto max-w-7xl px-6 py-16">
@@ -65,8 +65,8 @@ export default function ContactPage() {
               Reach the Imperion Global Holdings team directly.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-ink/75">
-              Share your sourcing needs, request pricing, or book a call to discuss coffee, avocado, and
-              macadamia export opportunities from Kenya.
+              Share your sourcing needs, request Kenyan coffee samples, ask for a quotation, or book a call to discuss
+              coffee-first export opportunities from Kenya.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
@@ -74,13 +74,13 @@ export default function ContactPage() {
                 href="#inquiry-form"
                 className="inline-flex items-center justify-center rounded-full bg-forest px-6 py-3 text-sm font-semibold text-white shadow-soft hover:bg-forest/90"
               >
-                Send Inquiry Form
+                Submit Buyer Inquiry
               </a>
               <a
                 href="tel:+254748167811"
                 className="inline-flex items-center justify-center rounded-full border border-forest/20 px-6 py-3 text-sm font-semibold text-forest hover:border-gold hover:text-gold"
               >
-                Book a Call
+                Speak to Sales
               </a>
             </div>
 
@@ -119,8 +119,8 @@ export default function ContactPage() {
                     <a
                       key={item.label}
                       href={item.href}
-                      target={item.href === "#" ? undefined : "_blank"}
-                      rel={item.href === "#" ? undefined : "noreferrer"}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noreferrer" : undefined}
                       aria-label={item.label}
                       title={item.label}
                       className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-forest/15 bg-beige text-forest transition hover:border-gold hover:bg-gold/15 hover:text-gold"
@@ -150,7 +150,7 @@ export default function ContactPage() {
           </div>
 
           <div id="inquiry-form">
-            <ContactForm title="Send Inquiry Form" />
+            <ContactForm title="Submit Buyer Inquiry" />
           </div>
         </div>
       </section>
