@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Head from "next/head";
+import Script from "next/script";
 import ChatbotWidget from "@/components/ChatbotWidget";
 
 const navigation = [
@@ -21,6 +23,25 @@ const socialLinks = [
 export default function Layout({ children }) {
   return (
     <div className="min-h-screen bg-beige text-ink">
+      <Head>
+        <link
+          href="https://assets.calendly.com/assets/external/widget.css"
+          rel="stylesheet"
+        />
+      </Head>
+      <Script
+        src="https://assets.calendly.com/assets/external/widget.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          window.Calendly.initBadgeWidget({
+            url: "https://calendly.com/imperionglobalholdings-info",
+            text: "Book a Call",
+            color: "#145B3A",
+            textColor: "#ffffff",
+            branding: true,
+          });
+        }}
+      />
       <header className="sticky top-0 z-50 border-b border-forest/10 bg-[#f7f3ea]/90 backdrop-blur-md">
         <div className="container-shell flex flex-col gap-4 py-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center justify-between gap-4">
