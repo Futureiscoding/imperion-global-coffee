@@ -93,7 +93,7 @@ export default function CoffeePage() {
             <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">
               Kenyan Coffee Sourced for Serious Buyers
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/88">
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-white">
               Imperion Global Holdings Limited supports roasters, importers, and green coffee buyers seeking
               traceable Kenyan coffee with clear grade information, quality checks, buyer communication, and export
               documentation support.
