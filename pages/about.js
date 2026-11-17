@@ -82,6 +82,34 @@ export default function AboutUsPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 pb-16">
+        <div className="grid overflow-hidden rounded-[2rem] border border-forest/10 bg-white shadow-soft lg:grid-cols-[0.8fr_1.2fr]">
+          <div className="min-h-[320px] bg-beige">
+            <img
+              src="/images/brian-mwangi.jpeg"
+              alt="Brian Mwangi, Imperion coffee quality assurance specialist"
+              className="h-full w-full object-cover object-center"
+            />
+          </div>
+          <div className="p-8 md:p-10">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Quality Assurance</p>
+            <h2 className="mt-3 text-3xl font-semibold text-forest">Meet Brian Mwangi, Coffee Quality Specialist</h2>
+            <p className="mt-5 text-sm leading-8 text-ink/75">
+              Brian supports Imperion’s quality review process, helping ensure coffee lots are assessed against
+              product specifications and buyer requirements before export decisions are made.
+            </p>
+            <h3 className="mt-7 text-lg font-semibold text-forest">What his role entails</h3>
+            <ul className="mt-4 grid gap-3 text-sm leading-7 text-ink/75 sm:grid-cols-2">
+              <li className="rounded-2xl bg-beige/60 p-4">Reviewing samples and cupping information.</li>
+              <li className="rounded-2xl bg-beige/60 p-4">Checking grade, screen size, moisture, and defects.</li>
+              <li className="rounded-2xl bg-beige/60 p-4">Comparing lot specifications with buyer requirements.</li>
+              <li className="rounded-2xl bg-beige/60 p-4">Supporting quality records and traceability documentation.</li>
+              <li className="rounded-2xl bg-beige/60 p-4 sm:col-span-2">Coordinating quality checks ahead of shipment.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 pb-16">
         <div className="rounded-[2rem] border border-forest/10 bg-white p-8 shadow-soft">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Values</p>
           <h2 className="mt-3 text-3xl font-semibold text-forest">How Imperion approaches buyer relationships.</h2>
