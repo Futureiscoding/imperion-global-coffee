@@ -1,232 +1,348 @@
-import Link from "next/link";
 import Image from "next/image";
-import BuyerConfidence from "@/components/BuyerConfidence";
-import TradeAssets from "@/components/TradeAssets";
+import Link from "next/link";
 import Seo from "@/components/Seo";
+import { brand, people, samples } from "@/content/rebuild-kit";
 
-const productSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Imperion Global Holdings Limited",
-  description:
-    "Kenyan specialty coffee exporter supplying premium green coffee, traceability and export coordination for roasters, importers and international buyers.",
-};
-
-const trustPoints = [
-  "Kenyan origin with traceable supply decisions",
-  "Lot-level quality information and specification context",
-  "Clear export communication and buyer support",
-  "Responsive sample and commercial inquiry flow",
+const coffeeGuides = [
+  {
+    href: "/coffee/grades-and-varieties",
+    number: "01",
+    title: "Grades and varieties",
+    description: "Get familiar with the language used to describe Kenyan coffee.",
+  },
+  {
+    href: "/coffee/regions-and-harvest",
+    number: "02",
+    title: "Regions and harvest",
+    description: "Explore Kenya's coffee-growing regions and the crop calendar.",
+  },
+  {
+    href: "/coffee/flavour-guide",
+    number: "03",
+    title: "Flavour guide",
+    description: "A guide to coffee flavour and the language used to describe it.",
+  },
+  {
+    href: "/quality-traceability",
+    number: "04",
+    title: "Quality and traceability",
+    description: "Learn about our approach and the information buyers can request.",
+  },
 ];
 
-const coffeeCards = [
-  { grade: "Kenya AA", origin: "Nyeri", variety: "SL28 / SL34", process: "Washed", score: "86+", altitude: "1,700–1,900 masl", crop: "2025/26", screen: "17/18+", moisture: "10.4%", availability: "Available", color: "bg-white" },
-  { grade: "Kenya AB", origin: "Kirinyaga", variety: "Ruiru 11 / Batian", process: "Washed", score: "84+", altitude: "1,600–1,800 masl", crop: "2025/26", screen: "15/16", moisture: "10.8%", availability: "Sampling", color: "bg-[#f7f3ea]" },
-  { grade: "Kenya PB", origin: "Embu", variety: "SL28 / Batian", process: "Washed", score: "85+", altitude: "1,650–1,850 masl", crop: "2025/26", screen: "Peaberry", moisture: "10.5%", availability: "Reserved", color: "bg-white" },
-  { grade: "Kenya C", origin: "Kiambu", variety: "Mixed Arabica", process: "Washed", score: "82+", altitude: "1,500–1,700 masl", crop: "2025/26", screen: "Smaller screen", moisture: "10.9%", availability: "Upcoming", color: "bg-[#f7f3ea]" },
-];
-
-const processSteps = [
-  { title: "Source", text: "Kenyan coffee origins and producer relationships." },
-  { title: "Process", text: "Washed, natural or other verified processing methods." },
-  { title: "Quality", text: "Grading, physical analysis and cupping evaluation." },
-  { title: "Export", text: "Documentation, packaging and logistics coordination." },
-  { title: "Roaster", text: "Coffee delivered to international buyers." },
+const buyerJourney = [
+  ["01", "Start with context", "Share the coffee profile, volume and destination you have in mind."],
+  ["02", "Compare the details", "Use grade, variety, process and cup notes to shape your enquiry."],
+  ["03", "Request an offer", "Ask us for current availability and commercial details directly."],
 ];
 
 export default function HomePage() {
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: brand.name,
+    url: `https://${brand.domain}`,
+    telephone: brand.phone,
+  };
+
   return (
     <>
       <Seo
-        title="Imperion Global Holdings | Premium Kenyan Coffee Exporter"
-        description="Imperion Global Holdings sources premium Kenyan green coffee for roasters, importers and specialty coffee businesses with transparent specifications, traceability and export coordination."
-        keywords="Kenyan green coffee exporter, Kenyan specialty coffee exporter, Kenya AA coffee, Kenyan coffee importer, Kenyan green coffee beans"
-        structuredData={productSchema}
+        title="Kenyan Coffee Exporter | Imperion Global Holdings Limited"
+        description="Imperion Global Holdings Limited is a Kenyan coffee exporter serving international roasters and importers. Request samples or a current offer."
+        structuredData={organization}
       />
 
-      <section className="relative overflow-hidden bg-darkgreen">
-        <div className="absolute inset-0">
-          <Image src="/images/coffee export.jpg" alt="Kenyan coffee export and sourcing activity" fill className="object-cover opacity-35" priority />
-        </div>
-        <div className="relative container-shell grid gap-10 py-18 md:py-24 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:py-28">
-          <div>
-            <p className="text-xs font-extrabold uppercase tracking-[0.25em] text-gold">Premium Kenyan coffee. Sourced with integrity.</p>
-            <h1 className="mt-5 max-w-xl font-serif text-5xl leading-none tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Premium Kenyan Coffee. Sourced with Integrity.
+      <section className="overflow-hidden bg-forest text-white">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-12 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-20">
+          <div className="max-w-2xl">
+            <p className="eyebrow text-goldlight">Kenyan coffee · International trade</p>
+            <h1 className="mt-5 font-serif text-[2.75rem] font-medium leading-[1.04] tracking-tight sm:text-6xl lg:text-[4.25rem]">
+              Traceable Kenyan green coffee,
+              <span className="block text-goldlight">from slope to roaster.</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85">
-              We connect international roasters, importers and specialty coffee businesses with carefully sourced Kenyan green coffee, backed by transparent specifications, traceability and reliable export coordination.
+            <p className="mt-6 max-w-xl text-base leading-7 text-white/80 sm:text-lg sm:leading-8">
+              Washed Arabica for international roasters and importers, graded, cupped and documented before it ships.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/coffee" className="cta-primary">Explore Our Coffee</Link>
-              <Link href="/contact#inquiry-form" className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-extrabold uppercase tracking-[0.04em] text-white hover:border-gold hover:text-gold">Request Samples</Link>
+            <p className="mt-5 font-serif text-xl text-goldlight">{brand.tagline}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/samples" className="cta-primary">
+                Request samples
+              </Link>
+              <Link
+                href="/coffee"
+                className="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/35 px-5 py-3 text-sm font-bold text-white transition hover:border-goldlight hover:text-goldlight"
+              >
+                Request an offer
+              </Link>
             </div>
-          </div>
-
-          <div className="rounded-[1.75rem] border border-white/15 bg-white/10 p-7 backdrop-blur-sm">
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-gold">Buyer confidence</p>
-            <div className="mt-6 space-y-3">
-              {trustPoints.map((point) => (
-                <div key={point} className="rounded-2xl border border-white/10 bg-white/8 p-4 text-sm font-medium leading-6 text-white/90">
-                  {point}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="container-shell py-16 md:py-20">
-        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-          <div>
-            <p className="section-label">Why Imperion</p>
-            <h2 className="section-title">Kenyan origin, quality focus and buyer clarity.</h2>
-            <p className="section-copy">
-              We help buyers understand where the coffee is from, how it is processed, how it is graded and what documentation supports the transaction. That clarity builds trust before the first shipment is ever booked.
+            <p className="mt-6 text-xs font-medium uppercase tracking-[0.14em] text-white/60">
+              Ruiru, Kiambu County, Kenya
             </p>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              ["Kenyan Origin", "Coffee sourced from recognised Kenyan growing regions."],
-              ["Quality Focus", "Lot-level specifications and quality information."],
-              ["Traceability", "Transparent origin and supply chain information."],
-              ["Export Capability", "Professional export coordination and documentation support."],
-            ].map(([title, body]) => (
-              <article key={title} className="premium-card p-6">
-                <h3 className="text-xl font-bold text-forest">{title}</h3>
-                <p className="mt-3 text-sm leading-7 text-ink/75">{body}</p>
-              </article>
-            ))}
+
+          <figure className="relative min-h-[300px] overflow-hidden rounded-lg border border-white/15 bg-darkgreen sm:min-h-[420px]">
+            <Image
+              src="/images/coffee-farm-hero.jpg"
+              alt="A coffee grower among coffee plants in Kenya"
+              fill
+              priority
+              sizes="(max-width: 1023px) 100vw, 46vw"
+              className="object-cover object-center"
+            />
+            <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-darkgreen/90 px-5 py-4 text-sm text-white sm:px-7">
+              <span>At origin in Kenya</span>
+              <span className="font-mono text-xs uppercase tracking-[0.14em] text-goldlight">Imperion</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section aria-label="Coffee enquiry essentials" className="border-b border-forest/10 bg-beige">
+        <div className="mx-auto grid max-w-7xl divide-y divide-forest/10 px-6 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
+          <div className="py-5 sm:px-6 sm:first:pl-0">
+            <p className="font-mono text-xl text-goldtext">200 g</p>
+            <p className="mt-1 text-sm font-semibold text-forest">Free samples; the buyer pays the courier.</p>
+          </div>
+          <div className="py-5 sm:px-6">
+            <p className="font-mono text-sm text-goldtext">NAMED TEAM</p>
+            <p className="mt-1 text-sm font-semibold text-forest">{people.managingDirector.name}, Managing Director and Brian Mwangi.</p>
+          </div>
+          <div className="py-5 sm:px-6 sm:pr-0">
+            <p className="font-mono text-sm text-goldtext">BUYER DOCUMENTS</p>
+            <p className="mt-1 text-sm font-semibold text-forest">Company documents shared with verified buyers on request.</p>
+          </div>
+          <div className="py-5 sm:px-6 sm:pr-0">
+            <p className="font-mono text-sm text-goldtext">FOB MOMBASA</p>
+            <p className="mt-1 text-sm font-semibold text-forest">CIF or CFR discussed for each offer.</p>
           </div>
         </div>
       </section>
 
-      <section className="container-shell pb-16 md:pb-20">
-        <div className="mb-8 max-w-3xl">
-          <p className="section-label">Our Coffee</p>
-          <h2 className="section-title">Premium Kenyan green coffee, clearly presented.</h2>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {coffeeCards.map((coffee) => (
-            <article key={coffee.grade} className={`premium-card ${coffee.color}`}>
-              <div className="relative aspect-[4/3] bg-forest/5">
-                <Image src="/images/coffee-grade-aa.jpg" alt={`${coffee.grade} Kenyan coffee`} fill className="object-cover" />
-              </div>
-              <div className="p-6">
-                <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-gold">{coffee.grade}</p>
-                <h3 className="mt-3 text-2xl font-bold text-forest">{coffee.origin}</h3>
-                <ul className="mt-4 space-y-2 text-sm leading-6 text-ink/75">
-                  <li><strong>Variety:</strong> {coffee.variety}</li>
-                  <li><strong>Process:</strong> {coffee.process}</li>
-                  <li><strong>Cup score:</strong> {coffee.score}</li>
-                  <li><strong>Altitude:</strong> {coffee.altitude}</li>
-                  <li><strong>Crop year:</strong> {coffee.crop}</li>
-                  <li><strong>Screen size:</strong> {coffee.screen}</li>
-                  <li><strong>Moisture:</strong> {coffee.moisture}</li>
-                  <li><strong>Availability:</strong> {coffee.availability}</li>
-                </ul>
-                <div className="mt-6 flex gap-3">
-                  <Link href="/coffee/current-lots" className="inline-flex rounded-full bg-forest px-4 py-2 text-xs font-bold uppercase tracking-[0.08em] text-white hover:bg-forest/90">
-                    View Lot
-                  </Link>
-                  <Link href="/contact#inquiry-form" className="inline-flex rounded-full border border-forest/20 px-4 py-2 text-xs font-bold uppercase tracking-[0.08em] text-forest hover:border-gold hover:text-gold">
-                    Request Sample
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-[#f9f5ee]">
-        <div className="container-shell py-16 md:py-20">
-          <div className="mb-8 max-w-3xl">
-            <p className="section-label">Origin</p>
-            <h2 className="section-title">From Kenyan farms to buyer requirements.</h2>
-          </div>
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {[
-              "Nyeri",
-              "Kirinyaga",
-              "Kiambu",
-              "Embu",
-              "Meru",
-              "Bungoma",
-              "Mt. Elgon",
-              "Machakos",
-            ].map((region) => (
-              <article key={region} className="premium-card p-5">
-                <p className="text-2xl font-bold text-forest">{region}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="container-shell py-16 md:py-20">
-        <div className="mb-8 max-w-3xl">
-          <p className="section-label">From farm to roaster</p>
-          <h2 className="section-title">The process behind reliable export supply.</h2>
-        </div>
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
-          {processSteps.map((step, index) => (
-            <article key={step.title} className="premium-card p-6">
-              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-gold">0{index + 1}</p>
-              <h3 className="mt-4 text-xl font-bold text-forest">{step.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-ink/75">{step.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="container-shell pb-16 md:pb-20">
-        <div className="rounded-[2rem] bg-forest p-8 text-white shadow-soft md:p-10">
-          <p className="section-label text-gold">Quality & Traceability</p>
-          <h2 className="mt-4 max-w-2xl font-serif text-4xl font-semibold leading-none tracking-tight text-white md:text-5xl">
-            Every lot has a story. Every specification has a purpose.
+      <section className="border-y border-forest/10 bg-beige">
+        <div className="mx-auto max-w-7xl px-6 py-12 sm:py-16">
+          <p className="section-label">Working with Kenya's trade framework</p>
+          <h2 className="mt-3 font-serif text-3xl leading-tight text-forest">
+            We work within the coffee and trade authorities that apply.
           </h2>
-          <p className="mt-5 max-w-3xl text-base leading-8 text-white/80">
-            Origin, variety, grade, screen size, moisture, processing method, crop year, lot information and cupping score all inform the buyer decision. We keep that context clear and usable.
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-stone">
+            Licence numbers and certificates are not published. Exact relationships and verified statuses are shared directly with verified buyers on request.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link href="/quality-traceability" className="cta-primary">Learn More</Link>
-            <Link href="/contact#inquiry-form" className="inline-flex items-center justify-center rounded-full border border-white/25 px-6 py-3 text-sm font-extrabold uppercase tracking-[0.04em] text-white hover:border-gold hover:text-gold">Request Samples</Link>
-          </div>
-        </div>
-      </section>
-
-      <BuyerConfidence />
-
-      <section className="container-shell pb-16 md:pb-20">
-        <div className="rounded-[2rem] border border-forest/10 bg-white p-8 shadow-soft md:p-10">
-          <p className="section-label">Taste before you commit</p>
-          <h2 className="section-title">Taste before you commit.</h2>
-          <p className="section-copy">
-            Request samples, assess the coffee in your own roasting or buying program and then confirm requirements before moving into larger commercial volumes.
-          </p>
-          <div className="mt-8 grid gap-4 md:grid-cols-5">
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              "Select coffee",
-              "Request samples",
-              "Evaluate the coffee",
-              "Confirm requirements",
-              "Proceed to commercial order",
-            ].map((step, index) => (
-              <div key={step} className="rounded-[1.25rem] bg-beige p-5 text-sm font-semibold leading-6 text-forest">
-                <span className="block text-xs uppercase tracking-[0.2em] text-gold">0{index + 1}</span>
-                {step}
-              </div>
+              "Coffee Board of Kenya",
+              "Kenya Plant Health Inspectorate Service",
+              "KenTrade",
+              "Made in Kenya",
+            ].map((authority) => (
+              <article key={authority} className="min-h-28 border border-forest/10 bg-white p-5">
+                <p className="text-sm font-bold text-forest">{authority}</p>
+                <p className="mt-3 text-xs leading-5 text-stone">Authority or mark status to be confirmed.</p>
+              </article>
             ))}
           </div>
-          <div className="mt-8">
-            <Link href="/contact#inquiry-form" className="cta-primary">Request Samples</Link>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+        <p className="section-label">What we do</p>
+        <h2 className="section-title">One coffee specialist, five connected services.</h2>
+        <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {[
+            ["Sourcing", "Washed Kenyan Arabica from verified sourcing regions."],
+            ["Quality", "Measured and cupped before a coffee is offered."],
+            ["Export documents", "Paperwork prepared before loading."],
+            ["Logistics", "Road to Mombasa and ocean freight, discussed per order."],
+            ["Geo-mapping", "Plot-level mapping work is being strengthened."],
+          ].map(([title, copy], index) => (
+            <article key={title} className="min-h-44 border-t-2 border-gold bg-white p-5 shadow-soft">
+              <p className="font-mono text-xs text-goldtext">0{index + 1}</p>
+              <h3 className="mt-5 font-serif text-xl text-forest">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-stone">{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+        <div className="grid gap-5 md:grid-cols-2">
+          <article className="premium-card grid gap-6 p-6 sm:grid-cols-[170px_1fr]">
+            <div className="relative flex min-h-44 items-center justify-center rounded-md bg-mist px-4 text-center">
+              <p className="text-sm font-semibold text-stone">Portrait to be supplied</p>
+            </div>
+            <div>
+              <p className="eyebrow text-goldtext">Managing Director</p>
+              <h2 className="mt-2 font-serif text-3xl text-forest">{people.managingDirector.name}</h2>
+              <p className="mt-4 text-sm leading-7 text-stone">
+                “Imperion exists to make buying Kenyan coffee simple and safe: a precise specification, honest availability and a person you can call.”
+              </p>
+              <Link href="/about" className="mt-5 inline-flex min-h-11 items-center font-bold text-forest underline decoration-gold underline-offset-4">
+                Read full message
+              </Link>
+            </div>
+          </article>
+          <article className="premium-card grid gap-6 p-6 sm:grid-cols-[170px_1fr]">
+            <div className="relative min-h-44 overflow-hidden rounded-md bg-mist">
+              <Image
+                src="/images/brian-mwangi.jpeg"
+                alt="Brian Mwangi at the coffee quality desk"
+                fill
+                sizes="170px"
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="eyebrow text-goldtext">Quality Assurance and Q Grader</p>
+              <h2 className="mt-2 font-serif text-3xl text-forest">{people.brian.name}</h2>
+              <p className="mt-4 text-sm leading-7 text-stone">
+                “Every coffee we offer is measured and cupped before it is described.”
+              </p>
+              <Link href="/quality-traceability" className="mt-5 inline-flex min-h-11 items-center font-bold text-forest underline decoration-gold underline-offset-4">
+                Read about quality
+              </Link>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-7xl gap-10 px-6 py-16 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
+        <div>
+          <p className="section-label">A considered first step</p>
+          <h2 className="section-title">Start with the coffee you need.</h2>
+          <p className="section-copy">
+            Share your requirements with us, explore the Kenyan coffee guide, or request a sample before moving to an offer.
+            We do not publish live lots or unverified stock availability.
+          </p>
+          <Link href="/coffee" className="cta-secondary mt-6">
+            Explore Kenyan coffee
+          </Link>
+        </div>
+        <aside className="border-l-2 border-gold bg-white px-6 py-7 shadow-soft sm:px-8">
+          <p className="eyebrow text-goldtext">Sample terms</p>
+          <p className="mt-3 font-serif text-2xl leading-snug text-forest">200 g to begin the conversation.</p>
+          <p className="mt-3 text-sm leading-7 text-stone">{samples.term}</p>
+          <Link href="/samples" className="mt-5 inline-flex min-h-11 items-center font-bold text-forest underline decoration-gold underline-offset-4">
+            How sample requests work
+          </Link>
+        </aside>
+      </section>
+
+      <section className="bg-white">
+        <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+          <div className="max-w-2xl">
+            <p className="section-label">A buyer's path</p>
+            <h2 className="section-title">From first questions to an offer.</h2>
+            <p className="section-copy">
+              Every enquiry is different. These guideposts help you decide what to ask and what to compare.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-mist">
+              <Image
+                src="/images/gallery/cupping-session.jpg"
+                alt="Green coffee samples and cups arranged for a cupping session"
+                fill
+                sizes="(max-width: 1023px) 100vw, 55vw"
+                className="object-cover"
+              />
+              <p className="absolute bottom-4 left-4 rounded-sm bg-ivory/95 px-3 py-2 text-xs font-semibold text-forest">
+                Compare what matters to your roast
+              </p>
+            </div>
+            <ol className="divide-y divide-forest/10">
+              {buyerJourney.map(([number, title, copy]) => (
+                <li key={number} className="grid gap-3 py-5 sm:grid-cols-[4rem_1fr]">
+                  <span className="font-mono text-sm text-goldtext">{number}</span>
+                  <div>
+                    <h3 className="font-serif text-2xl text-forest">{title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-stone">{copy}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
-      <TradeAssets />
+      <section className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="section-label">Learn Kenyan coffee</p>
+            <h2 className="section-title">A useful guide for your next enquiry.</h2>
+          </div>
+          <Link href="/coffee" className="min-h-11 self-start font-semibold text-forest underline decoration-gold underline-offset-4 sm:self-auto">
+            All coffee information
+          </Link>
+        </div>
+        <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {coffeeGuides.map((guide) => (
+            <Link
+              key={guide.href}
+              href={guide.href}
+              className="group min-h-48 border border-forest/10 bg-white p-5 transition hover:-translate-y-1 hover:border-forest/30 hover:shadow-soft"
+            >
+              <span className="font-mono text-xs text-goldtext">{guide.number}</span>
+              <h3 className="mt-6 font-serif text-2xl text-forest group-hover:text-leaf">{guide.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-stone">{guide.description}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-y border-forest/10 bg-beige">
+        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-12 sm:py-16 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p className="section-label">A developing second line</p>
+            <h2 className="mt-3 font-serif text-3xl leading-tight text-forest sm:text-4xl">
+              Macadamia kernels, in development.
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-stone">
+              Coffee remains our primary product. Our macadamia offering is developing; specifications and availability are not yet published.
+            </p>
+          </div>
+          <Link href="/macadamia" className="cta-secondary">
+            Explore macadamia
+          </Link>
+        </div>
+      </section>
+
+      <section className="bg-forest text-white">
+        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-12 sm:py-14 lg:grid-cols-[auto_1fr_auto] lg:items-center">
+          <span className="font-mono text-sm uppercase tracking-[0.16em] text-goldlight">EU due diligence</span>
+          <div>
+            <h2 className="font-serif text-2xl sm:text-3xl">Geo-mapping work is being strengthened.</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-white/75">
+              We are strengthening plot-level geo-mapping in our sourcing regions to support EU buyers' due diligence. This is not a claim of full EUDR compliance.
+            </p>
+          </div>
+          <Link href="/quality-traceability" className="min-h-11 self-start font-semibold text-goldlight underline decoration-gold underline-offset-4 lg:self-center">
+            Our approach
+          </Link>
+        </div>
+      </section>
+
+      <section className="bg-darkgreen text-white">
+        <div className="mx-auto flex max-w-7xl flex-col gap-7 px-6 py-14 sm:py-16 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="eyebrow text-goldlight">Begin a conversation</p>
+            <h2 className="mt-3 font-serif text-3xl leading-tight sm:text-4xl">
+              Tell us what you are looking for.
+            </h2>
+            <p className="mt-3 text-sm leading-7 text-white/75">
+              Request a coffee sample, ask for a current offer, or get in touch with the Imperion team.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/samples" className="cta-primary">Request samples</Link>
+            <Link
+              href="/contact"
+              className="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/35 px-5 py-3 text-sm font-bold text-white transition hover:border-goldlight hover:text-goldlight"
+            >
+              Contact us
+            </Link>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

@@ -1,165 +1,69 @@
 import Link from "next/link";
 import Seo from "@/components/Seo";
+import { people } from "@/content/rebuild-kit";
 
-const values = ["Integrity", "Traceability", "Quality", "Accountability", "Long-term partnerships", "Farmer and origin respect"];
-
-const trustDetails = [
-  "Based in Ruiru, Kiambu County, Kenya",
-  "Main office address: P.O. Box 964-00232, Ruiru, Kenya",
-  "Phone: +254 748 167 811",
-  "Website: www.imperionglobalholdings.co.ke",
-  "Main product focus: Premium Kenyan green coffee exports",
-];
-
-export default function AboutUsPage() {
+export default function AboutPage() {
   return (
     <>
       <Seo
-        title="About Imperion Global Holdings Limited | Kenyan Export Company"
-        description="Learn about Imperion Global Holdings Limited, a Kenya-based export company focused on traceable coffee, quality assurance, and buyer-focused agricultural trade."
-        image="/images/simon-njuguna.jpg"
-        imageAlt="Simon Njuguna, founder of Imperion Global Holdings Limited"
+        title="About Imperion Global Holdings | Kenyan Coffee Exporter"
+        description="Meet the team and operating approach behind Imperion's Kenyan coffee export service."
+        image="/images/coffee export.jpg"
       />
-
-      <section
-        className="relative overflow-hidden"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(21, 58, 43, 0.66), rgba(21, 58, 43, 0.78)), url('/images/media-coffee-field.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:py-28">
-          <div className="max-w-4xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-gold">About Imperion</p>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">
-              Founder-led Kenyan coffee export discipline.
-            </h1>
-            <p className="mt-6 text-lg leading-8 text-white/85">
-              Imperion Global Holdings Limited connects international buyers with traceable Kenyan coffee and
-              agricultural products through ethical sourcing, quality assurance, and reliable export coordination.
-            </p>
-          </div>
+      <section className="bg-darkgreen text-white">
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
+          <p className="text-xs font-extrabold uppercase tracking-[0.25em] text-gold">About</p>
+          <h1 className="mt-5 max-w-4xl font-serif text-5xl leading-none md:text-6xl">A Kenyan export team built for clear, buyer-led decisions.</h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-white/85">Imperion coordinates Kenyan green coffee sourcing, evaluation and export communication for roasters, importers and green coffee traders.</p>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <article className="overflow-hidden rounded-[2rem] border border-forest/10 bg-white shadow-soft">
-            <div className="aspect-[4/5] bg-beige">
-              <img src="/images/simon-njuguna.jpg" alt="Simon Njuguna, founder of Imperion Global Holdings Limited" className="h-full w-full object-cover" />
-            </div>
-          </article>
-
-          <article className="rounded-[2rem] border border-forest/10 bg-white p-8 shadow-soft">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Founder Profile</p>
-            <h2 className="mt-3 text-3xl font-semibold text-forest">Founder-Led Export Discipline</h2>
-            <p className="mt-5 text-sm leading-8 text-ink/75">
-              Imperion Global Holdings Limited is led by Simon Njuguna, whose background combines business
-              development, export coordination, technology, compliance awareness, and a practical understanding of
-              Kenya's agricultural value chains. The company was built to connect global buyers with Kenyan products
-              through transparency, disciplined communication, and quality-focused sourcing.
-            </p>
-            <div className="mt-8 grid gap-5 md:grid-cols-2">
-              <div className="rounded-[1.5rem] bg-beige/60 p-6">
-                <h3 className="text-lg font-semibold text-forest">Company Mission</h3>
-                <p className="mt-3 text-sm leading-7 text-ink/75">
-                  To connect international buyers with traceable Kenyan coffee and agricultural products through
-                  ethical sourcing, quality assurance, and reliable export coordination.
-                </p>
+        <div className="grid gap-6 md:grid-cols-2">
+          {[
+            people.managingDirector,
+            people.brian,
+          ].map((person) => (
+            <article key={person.name} className="premium-card p-8">
+              <div className="aspect-[4/3] rounded-lg bg-mist">
+                {person.name === "Brian Mwangi" ? (
+                  <img src="/images/brian-mwangi.jpeg" alt="Brian Mwangi" className="h-full w-full rounded-lg object-cover" />
+                ) : (
+                  <div className="flex h-full items-center justify-center px-6 text-center text-sm font-semibold text-stone">
+                    Portrait to be supplied
+                  </div>
+                )}
               </div>
-              <div className="rounded-[1.5rem] bg-beige/60 p-6">
-                <h3 className="text-lg font-semibold text-forest">Company Vision</h3>
-                <p className="mt-3 text-sm leading-7 text-ink/75">
-                  To become a trusted Kenyan export partner known for integrity, measurable quality, and long-term
-                  buyer relationships.
-                </p>
-              </div>
-            </div>
-          </article>
+              <p className="mt-6 text-xs font-extrabold uppercase tracking-[0.2em] text-goldtext">{person.title}</p>
+              <h2 className="mt-2 text-3xl font-semibold text-forest">{person.name}</h2>
+              <p className="mt-4 text-sm leading-7 text-stone">Email: {person.email}</p>
+              {person.linkedin.startsWith("http") ? (
+                <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block font-bold text-forest underline decoration-gold underline-offset-4">LinkedIn</a>
+              ) : (
+                <p className="mt-3 text-sm text-stone">LinkedIn: {person.linkedin}</p>
+              )}
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="grid overflow-hidden rounded-[2rem] border border-forest/10 bg-white shadow-soft lg:grid-cols-[0.8fr_1.2fr]">
-          <div className="min-h-[320px] bg-beige">
-            <img
-              src="/images/brian-mwangi.jpeg"
-              alt="Brian Mwangi, Imperion coffee quality assurance specialist"
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-          <div className="p-8 md:p-10">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Quality Assurance</p>
-            <h2 className="mt-3 text-3xl font-semibold text-forest">Meet Brian Mwangi, Coffee Quality Specialist</h2>
-            <p className="mt-5 text-sm leading-8 text-ink/75">
-              Brian supports Imperion’s quality review process, helping ensure coffee lots are assessed against
-              product specifications and buyer requirements before export decisions are made.
-            </p>
-            <h3 className="mt-7 text-lg font-semibold text-forest">What his role entails</h3>
-            <ul className="mt-4 grid gap-3 text-sm leading-7 text-ink/75 sm:grid-cols-2">
-              <li className="rounded-2xl bg-beige/60 p-4">Reviewing samples and cupping information.</li>
-              <li className="rounded-2xl bg-beige/60 p-4">Checking grade, screen size, moisture, and defects.</li>
-              <li className="rounded-2xl bg-beige/60 p-4">Comparing lot specifications with buyer requirements.</li>
-              <li className="rounded-2xl bg-beige/60 p-4">Supporting quality records and traceability documentation.</li>
-              <li className="rounded-2xl bg-beige/60 p-4 sm:col-span-2">Coordinating quality checks ahead of shipment.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="rounded-[2rem] border border-forest/10 bg-white p-8 shadow-soft">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Values</p>
-          <h2 className="mt-3 text-3xl font-semibold text-forest">How Imperion approaches buyer relationships.</h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {values.map((value) => (
-              <article key={value} className="rounded-[1.25rem] bg-beige/60 p-5">
-                <h3 className="text-lg font-semibold text-forest">{value}</h3>
+      <section className="bg-beige/60">
+        <div className="mx-auto max-w-7xl px-6 py-16">
+          <p className="section-label">Operating approach</p>
+          <h2 className="section-title">Evidence before commitment.</h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {[
+              ["Integrity", "Clear terms, documented decisions and direct buyer communication."],
+              ["Quality", "Grade, physical checks and cupping context before a shipment decision."],
+              ["Traceability", "Origin and supply information presented without unsupported claims."],
+            ].map(([title, copy]) => (
+              <article key={title} className="premium-card p-6">
+                <h3 className="text-xl font-semibold text-forest">{title}</h3>
+                <p className="mt-3 text-sm leading-7 text-stone">{copy}</p>
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="grid gap-6 lg:grid-cols-2">
-          <article className="rounded-[2rem] border border-forest/10 bg-forest p-8 text-white shadow-soft">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Trust Details</p>
-            <h2 className="mt-3 text-3xl font-semibold">Clear company details for buyer review.</h2>
-            <ul className="mt-6 space-y-3 text-sm leading-7 text-white/85">
-              {trustDetails.map((detail) => (
-                <li key={detail}>{detail}</li>
-              ))}
-            </ul>
-            <div className="mt-6 space-y-2 text-sm leading-7 text-white/85">
-              <p>
-                Email: <a href="mailto:info@imperionglobalholdings.co.ke" className="font-semibold text-gold">info@imperionglobalholdings.co.ke</a>
-              </p>
-              <p>
-                Sales: <a href="mailto:sales@imperionglobalholdings.co.ke" className="font-semibold text-gold">sales@imperionglobalholdings.co.ke</a>
-              </p>
-            </div>
-          </article>
-
-          <article className="rounded-[2rem] border border-forest/10 bg-white p-8 shadow-soft">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Export Focus</p>
-            <h2 className="mt-3 text-3xl font-semibold text-forest">Coffee first, with broader Kenya supply support.</h2>
-            <p className="mt-4 text-sm leading-8 text-ink/75">
-              The company is positioned around premium Kenyan coffee exports for roasters, green coffee importers,
-              distributors, traders, and buyers seeking origin transparency. Avocado and macadamia remain available
-              for qualified buyers developing broader Kenya sourcing programs.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/coffee" className="inline-flex rounded-full bg-forest px-6 py-3 text-sm font-semibold text-white hover:bg-forest/90">
-                Explore Coffee Program
-              </Link>
-              <Link href="/contact#inquiry-form" className="inline-flex rounded-full border border-forest/20 px-6 py-3 text-sm font-semibold text-forest hover:border-gold hover:text-gold">
-                Submit Buyer Inquiry
-              </Link>
-            </div>
-          </article>
+          <Link href="/contact" className="cta-primary mt-8">Contact the team</Link>
         </div>
       </section>
     </>
