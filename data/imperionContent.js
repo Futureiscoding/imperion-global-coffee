@@ -1,0 +1,6 @@
+export const brand={name:"Imperion Global Holdings Limited",tagline:"Integrity in every bean.",phone:"+254 748 167 811",phoneHref:"tel:+254748167811",email:"info@imperionglobalholdings.co.ke",salesEmail:"sales@imperionglobalholdings.co.ke",office:"Ruiru, Kiambu County, Kenya",poBox:"P.O. Box 964-00232, Ruiru, Kenya",whatsapp:"https://wa.me/254748167811?text=Hello%20Imperion%2C%20I%20would%20like%20to%20discuss%20Kenyan%20coffee%20sourcing."};
+export const samplePolicy="We send 200 g samples free of charge. You cover the courier cost, and we credit it against your first invoice once you place an order for your first consignment.";
+export const credentialsStatement="Licences and company documents are shared directly with verified buyers on request.";
+export const eudrStatement="Imperion is strengthening plot-level geo-mapping across its sourcing regions to support EU buyers’ due diligence. This work is in progress; we do not claim full EUDR compliance.";
+export const accreditationNames=["Coffee Board of Kenya (formerly the AFA Coffee Directorate)","KEPHIS","KenTrade","Made in Kenya brand mark (Brand Kenya)"];
+export const coffeeGrades=["AA","AB","PB","C"];
