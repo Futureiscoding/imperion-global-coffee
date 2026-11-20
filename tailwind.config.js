@@ -8,16 +8,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        forest: "#145B3A",
-        darkgreen: "#0E4F36",
+        forest: "#0E4F36",
+        darkgreen: "#092F23",
+        leaf: "#2E6B4F",
         gold: "#D4AF37",
-        ivory: "#F7F3EA",
-        beige: "#F4F1E8",
-        ink: "#1E2A2B",
+        goldtext: "#715509",
+        goldlight: "#E8CC70",
+        mist: "#E5EDE7",
+        ivory: "#FBF8F0",
+        beige: "#F3EEDC",
+        ink: "#1E211C",
+        stone: "#5A625B",
+        cherry: "#A3322B",
       },
       fontFamily: {
-        serif: ['"Cormorant Garamond"', '"Georgia"', 'serif'],
-        sans: ['"Manrope"', '"Segoe UI"', 'sans-serif'],
+        serif: ['"Fraunces"', '"Georgia"', 'serif'],
+        sans: ['"Inter"', '"Segoe UI"', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', '"Courier New"', 'monospace'],
       },
       boxShadow: {
         soft: "0 18px 45px rgba(20, 91, 58, 0.12)",

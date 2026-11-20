@@ -45,6 +45,18 @@ export default async function handler(req, res) {
       `,
     });
 
+    await transporter.sendMail({
+      from: `"Imperion Global Holdings" <${process.env.ZOHO_SMTP_USER}>`,
+      to: email,
+      replyTo: process.env.CONTACT_TO_EMAIL || "info@imperionglobalholdings.co.ke",
+      subject: "We received your Imperion inquiry",
+      html: `
+        <p>Thank you for contacting Imperion Global Holdings.</p>
+        <p>We have received your inquiry and will review it. A team member will reply from an official @imperionglobalholdings.co.ke address.</p>
+        <p>Licences and company documents are shared only after buyer verification.</p>
+      `,
+    });
+
     return res.status(200).json({
       message:
         "Thank you. Your inquiry has been received. Our team will review your requirements and respond with the most relevant next steps.",

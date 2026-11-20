@@ -14,15 +14,14 @@ const tradeAssets = [
     download: true,
   },
   {
-    label: "Coffee Catalogue PDF",
-    href: "/coffee/catalog",
-    status: "Online catalogue available",
+    label: "Coffee Offer Sheet",
+    href: "/coffee",
+    status: "Request current availability",
   },
   {
-    label: "Coffee Spec Sheet",
-    href: "/spec-sheet-template.pdf",
-    status: "Ready for download",
-    download: true,
+    label: "Coffee Grades Guide",
+    href: "/coffee/grades-and-varieties",
+    status: "View the guide",
   },
   {
     label: "Sample Request Form",

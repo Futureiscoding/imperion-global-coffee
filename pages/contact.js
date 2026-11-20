@@ -4,7 +4,7 @@ import Seo from "@/components/Seo";
 const socialLinks = [
   {
     label: "WhatsApp",
-    href: "https://wa.me/254748167811",
+    href: "https://wa.me/254748167811?text=Hello%20Imperion%2C%20I%20would%20like%20samples%20of%20Kenyan%20coffee.",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5 fill-current">
         <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.56 2 2.1 6.45 2.1 11.93c0 1.75.46 3.47 1.33 4.98L2 22l5.25-1.38a9.95 9.95 0 0 0 4.77 1.22h.01c5.47 0 9.92-4.45 9.92-9.92a9.86 9.86 0 0 0-2.9-7.01ZM12.03 20.16h-.01a8.23 8.23 0 0 1-4.19-1.14l-.3-.18-3.12.82.84-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.53 3.7-8.23 8.24-8.23a8.17 8.17 0 0 1 5.82 2.41 8.16 8.16 0 0 1 2.4 5.82c0 4.54-3.69 8.23-8.22 8.23Zm4.51-6.15c-.25-.13-1.47-.72-1.7-.8-.23-.08-.4-.13-.57.13-.17.25-.65.8-.8.97-.15.17-.3.19-.55.06-.25-.13-1.07-.39-2.03-1.25-.75-.67-1.26-1.49-1.41-1.74-.15-.25-.02-.38.11-.5.11-.11.25-.3.38-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.44-.06-.13-.57-1.37-.78-1.88-.21-.5-.43-.43-.57-.44h-.49c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1 0 1.23.9 2.43 1.02 2.6.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.59.21-1.09.15-1.19-.07-.11-.23-.17-.48-.3Z" />
@@ -17,24 +17,6 @@ const socialLinks = [
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5 fill-current">
         <path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3A1.96 1.96 0 1 0 5.3 6.9 1.96 1.96 0 0 0 5.25 3Zm14.69 9.86c0-3.46-1.85-5.07-4.32-5.07-1.99 0-2.88 1.1-3.37 1.87V8.5H8.87c.04.77 0 11.5 0 11.5h3.38v-6.42c0-.34.02-.69.13-.93.27-.69.89-1.41 1.93-1.41 1.36 0 1.91 1.04 1.91 2.56V20h3.38v-7.14Z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Facebook",
-    href: "https://www.facebook.com/ImperionGlobalHoldingsLimited/",
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5 fill-current">
-        <path d="M13.5 21v-8.03h2.7l.4-3.13h-3.1V7.84c0-.91.25-1.52 1.56-1.52H16.9V3.53A24.2 24.2 0 0 0 14.2 3c-2.67 0-4.5 1.63-4.5 4.62v2.22H6.67v3.13H9.7V21h3.8Z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/imperion_global/",
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5 fill-current">
-        <path d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3Zm0 1.8A2.7 2.7 0 0 0 4.8 7.5v9a2.7 2.7 0 0 0 2.7 2.7h9a2.7 2.7 0 0 0 2.7-2.7v-9a2.7 2.7 0 0 0-2.7-2.7h-9Zm9.45 1.35a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1ZM12 7.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5Zm0 1.8A2.7 2.7 0 1 0 14.7 12 2.7 2.7 0 0 0 12 9.3Z" />
       </svg>
     ),
   },
@@ -60,7 +42,7 @@ export default function ContactPage() {
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-gold">Contact</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-gold">Talk to the export desk</p>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight text-forest md:text-5xl">
               Reach the Imperion Global Holdings team directly.
             </h1>
@@ -150,7 +132,20 @@ export default function ContactPage() {
           </div>
 
           <div id="inquiry-form">
-            <ContactForm title="Submit Buyer Inquiry" />
+            <ContactForm title="Submit Buyer Inquiry" formType="general" />
+                <div className="mt-6">
+                  <ContactForm title="Request company documents" formType="documents-request" />
+                </div>
+            <article className="mt-6 rounded-[2rem] border border-cherry/20 bg-white p-8 shadow-soft">
+              <h2 className="text-2xl font-semibold text-forest">Verify us before you pay</h2>
+              <div className="mt-4 space-y-3 text-sm leading-7 text-ink/75">
+                <p>We write only from @imperionglobalholdings.co.ke addresses and call or message from +254 748 167 811.</p>
+                <p>We never ask you to pay into a personal account.</p>
+                <p>We never change bank details by email alone. Confirm them by phone with the sales desk.</p>
+                <p>Report suspicious messages to info@imperionglobalholdings.co.ke.</p>
+              </div>
+              <p className="mt-5 text-sm font-semibold text-forest">Licences and company documents are shared directly with verified buyers on request.</p>
+            </article>
           </div>
         </div>
       </section>
