@@ -1,0 +1,250 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Verify Node engine change",
+			"type": "shell",
+			"command": "git status --short && git --no-pager diff -- package.json && node --version",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Commit and push Node 26 update",
+			"type": "shell",
+			"command": "git add package.json && git commit -m \"Use Node.js 26 on Vercel\" -m \"Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>\" && git push origin main",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check pushed commit status",
+			"type": "shell",
+			"command": "git status -sb && git --no-pager log -1 --oneline --decorate && git rev-parse HEAD && git rev-parse origin/main",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check starting git state",
+			"type": "shell",
+			"command": "git status --short",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Calendly integration",
+			"type": "shell",
+			"command": "npm run build",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Calendly change",
+			"type": "shell",
+			"command": "git diff --check && git diff -- components/Layout.js && git status --short",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Commit and push Calendly integration",
+			"type": "shell",
+			"command": "git add components/Layout.js && git commit -m \"Add Calendly booking badge\" -m \"Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>\" && git push origin main",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check before QA profile edit",
+			"type": "shell",
+			"command": "git status --short",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build about QA section",
+			"type": "shell",
+			"command": "npm run build",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check QA profile diff",
+			"type": "shell",
+			"command": "git diff --check && git --no-pager diff --stat && git status --short",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Commit and push QA profile section",
+			"type": "shell",
+			"command": "git add pages/about.js && git commit -m \"Add QA specialist profile to About page\" -m \"Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>\" && git push origin main",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check coffee page worktree",
+			"type": "shell",
+			"command": "git status --short",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Commit and push coffee text color",
+			"type": "shell",
+			"command": "git add pages/coffee/index.js && git commit -m \"Improve coffee hero text contrast\" -m \"Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>\" && git push origin main",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check sourcing guide worktree",
+			"type": "shell",
+			"command": "git status --short",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify sourcing guide download link",
+			"type": "shell",
+			"command": "git diff --check && git --no-pager diff -- components/TradeAssets.js && git status --short",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify guide download link diff",
+			"type": "shell",
+			"command": "git diff --check && git diff --stat && git status --short",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Push coffee sourcing guide link",
+			"type": "shell",
+			"command": "git add components/TradeAssets.js && git commit -m \"Add downloadable coffee sourcing guide\" -m \"Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>\" && git push origin main",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate website build",
+			"type": "shell",
+			"command": "npm run build",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate website lint",
+			"type": "shell",
+			"command": "npm run lint",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build after profile update",
+			"type": "shell",
+			"command": "npm run build",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check changed files",
+			"type": "shell",
+			"command": "git status --short & git diff --check & git diff --stat",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Final website production build",
+			"type": "shell",
+			"command": "npm run build",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restore locked dependencies",
+			"type": "shell",
+			"command": "pnpm install --frozen-lockfile",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restore dependencies with Corepack",
+			"type": "shell",
+			"command": "corepack pnpm install --frozen-lockfile",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify production build final",
+			"type": "shell",
+			"command": "npm run build",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Review worktree for commit",
+			"type": "shell",
+			"command": "git status --short & git diff --check",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect commit scope",
+			"type": "shell",
+			"command": "git status --short & git branch --show-current & git remote -v & git diff --cached --stat & git diff --stat & git diff --cached --name-status & git diff --name-status & git diff --check",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Review changed file lists",
+			"type": "shell",
+			"command": "git status -sb & git diff --cached --name-status & git diff --name-status",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Stage website rebuild",
+			"type": "shell",
+			"command": "git add -u & git add pages/gallery.js & git diff --cached --check & git status --short",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Confirm branch and staged diff",
+			"type": "shell",
+			"command": "git ls-remote --heads origin imperion-website-preview-20261118 & git log -1 --oneline & git status --short --branch & git diff --cached --check & git diff --cached --stat",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Commit website rebuild",
+			"type": "shell",
+			"command": "git commit -m \"Rebuild Imperion coffee exporter website\" -m \"Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>\"",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Push website rebuild",
+			"type": "shell",
+			"command": "git push -u origin imperion-website-preview-20261118",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify pushed branch",
+			"type": "shell",
+			"command": "git status --short --branch & git log -1 --oneline --decorate & git ls-remote --heads origin imperion-website-preview-20261118",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Preview Imperion website",
+			"type": "shell",
+			"command": "npm run dev",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start local site preview",
+			"type": "shell",
+			"command": "npm run dev",
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

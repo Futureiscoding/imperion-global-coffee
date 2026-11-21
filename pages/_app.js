@@ -1,7 +1,6 @@
 import Head from "next/head";
 import "@/styles/globals.css";
 import Layout from "@/components/Layout";
-import PlaceholderBanner from "@/components/PlaceholderBanner";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -13,7 +12,6 @@ export default function App({ Component, pageProps }) {
         <link rel="apple-touch-icon" href="/logo.png" />
       </Head>
       <Layout>
-        <PlaceholderBanner items={["verified grades and varieties", "verified sourcing regions", "minimum order and payment terms"]} />
         <Component {...pageProps} />
       </Layout>
     </>
