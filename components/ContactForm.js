@@ -102,7 +102,10 @@ export default function ContactForm({
           ["country", "Country", "text", true],
           ["phone", "Phone / WhatsApp", "tel", false],
           ...(formType === "offer-sheet" || formType === "general"
-            ? [["port", "Destination port", "text", false]]
+            ? [
+                ["port", "Destination country or port", "text", false],
+                ["volume", "Required quantity", "text", false],
+              ]
             : []),
           ...(formType === "offer-sheet"
             ? [
@@ -137,6 +140,22 @@ export default function ContactForm({
           </label>
         ))}
       </div>
+
+      {formType === "general" ? (
+        <label className="mt-5 block text-sm font-semibold text-ink/80">
+          Product of interest
+          <select
+            value={values.interest}
+            onChange={(event) => update("interest", event.target.value)}
+            className="mt-2 w-full rounded-lg border border-forest/15 bg-ivory px-4 py-3 font-normal outline-none focus:border-gold"
+          >
+            <option value="coffee">Kenyan Arabica Coffee</option>
+            <option value="avocado">Hass Avocado</option>
+            <option value="macadamia">Macadamia</option>
+            <option value="other">Other agricultural product</option>
+          </select>
+        </label>
+      ) : null}
 
       {showSampleTerms ? (
         <div className="mt-5 grid gap-5 md:grid-cols-2">

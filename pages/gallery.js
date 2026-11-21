@@ -8,6 +8,8 @@ const photos = [
   { src: "/images/gallery/quality-sorting.jpeg", alt: "Green coffee samples arranged in trays for quality review", category: "Quality desk", title: "Quality review", caption: "Green coffee sample review" },
   { src: "/images/gallery/cupping-session.jpg", alt: "Coffee cups and samples arranged for a cupping session", category: "Quality desk", title: "Cupping table", caption: "Cupping and sample evaluation" },
   { src: "/images/gallery/expo-team.jpg", alt: "Imperion representatives meeting trade buyers", category: "Team", title: "Trade team", caption: "Industry event in Kenya" },
+  { type: "video", src: "/videos/coffee-work-2026-09.mp4", poster: "/images/gallery/cupping-session.jpg", alt: "Coffee quality work and sample preparation", category: "Processing", title: "Coffee work", caption: "Coffee processing and sample preparation" },
+  { type: "video", src: "/videos/coffee-work-2026-10.mp4", poster: "/images/coffee export.jpg", alt: "Coffee export preparation and sourcing footage", category: "Shipping", title: "Export preparation", caption: "Sourcing, preparation, and trade coordination" },
 ];
 
 export default function GalleryPage() {
@@ -51,7 +53,15 @@ export default function GalleryPage() {
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((photo, index) => (
             <button key={photo.src} type="button" onClick={() => setActive(index)} className="group overflow-hidden border border-forest/10 bg-white text-left">
-              <div className="relative aspect-[4/3]"><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition duration-300 group-hover:scale-[1.02]" /></div>
+              <div className="relative aspect-[4/3]">
+                {photo.type === "video" ? (
+                  <video muted loop playsInline preload="metadata" poster={photo.poster} className="h-full w-full object-cover" aria-label={photo.alt}>
+                    <source src={photo.src} type="video/mp4" />
+                  </video>
+                ) : (
+                  <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition duration-300 group-hover:scale-[1.02]" />
+                )}
+              </div>
               <div className="p-5"><p className="text-xs font-bold uppercase tracking-[0.16em] text-goldtext">{photo.category}</p><h2 className="mt-2 text-xl font-semibold text-forest">{photo.title}</h2><p className="mt-2 text-sm text-stone">{photo.caption}</p></div>
             </button>
           ))}
@@ -61,7 +71,15 @@ export default function GalleryPage() {
         <div className="fixed inset-0 z-[80] flex items-center justify-center bg-darkgreen/95 p-4" role="dialog" aria-modal="true" aria-label="Gallery photo">
           <button ref={closeRef} type="button" onClick={() => setActive(null)} className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 text-2xl text-white" aria-label="Close photo">×</button>
           <figure className="max-h-[85vh] max-w-5xl">
-            <div className="relative h-[70vh] w-[90vw] max-w-5xl"><Image src={filtered[active].src} alt={filtered[active].alt} fill sizes="90vw" className="object-contain" /></div>
+            <div className="relative h-[70vh] w-[90vw] max-w-5xl">
+              {filtered[active].type === "video" ? (
+                <video controls autoPlay muted playsInline preload="metadata" poster={filtered[active].poster} className="h-full w-full object-contain" aria-label={filtered[active].alt}>
+                  <source src={filtered[active].src} type="video/mp4" />
+                </video>
+              ) : (
+                <Image src={filtered[active].src} alt={filtered[active].alt} fill sizes="90vw" className="object-contain" />
+              )}
+            </div>
             <figcaption className="mt-3 text-center text-sm text-white">{filtered[active].title} · {filtered[active].caption}</figcaption>
           </figure>
         </div>

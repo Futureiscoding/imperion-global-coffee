@@ -1,62 +1,37 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { brand } from "@/content/rebuild-kit";
 
-const coffeeLinks = [
-  ["/coffee", "Kenyan coffee"],
-  ["/coffee/grades-and-varieties", "Grades and varieties"],
-  ["/coffee/regions-and-harvest", "Regions and harvest"],
-  ["/coffee/flavour-guide", "Flavour guide"],
-];
-
-function NavigationLinks({ onNavigate, mobile = false }) {
+function NavigationLinks({ onNavigate, mobile = false, pathname = "" }) {
+  const links = [
+    ["/", "Home"],
+    ["/about", "About Us"],
+    ["/coffee", "Products"],
+    ["/services", "Services"],
+    ["/quality-traceability", "Quality & Compliance"],
+    ["/gallery", "Gallery"],
+    ["/contact", "Contact"],
+  ];
   return (
     <>
-      <Link href="/about" onClick={onNavigate} className="navigation-link">
-        About
-      </Link>
-      <details className="navigation-coffee">
-        <summary className="navigation-link" aria-label="Coffee pages">
-          Coffee <span className="ml-2 text-xs" aria-hidden="true">⌄</span>
-        </summary>
-        <div className="navigation-dropdown">
-          {coffeeLinks.map(([href, label]) => (
-            <Link key={href} href={href} onClick={onNavigate}>
-              {label}
-            </Link>
-          ))}
-        </div>
-      </details>
-      <Link href="/macadamia" onClick={onNavigate} className="navigation-link">
-        Macadamia
-        <span className="ml-2 rounded-sm bg-mist px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-forest">
-          Developing
-        </span>
-      </Link>
-      <Link href="/quality-traceability" onClick={onNavigate} className="navigation-link">
-        Quality
-      </Link>
-      <Link href="/samples" onClick={onNavigate} className="navigation-link">
-        Samples
-      </Link>
-      <Link href="/export" onClick={onNavigate} className="navigation-link">
-        Export
-      </Link>
-      <Link href="/contact" onClick={onNavigate} className="navigation-link">
-        Contact
-      </Link>
-      {mobile ? (
-        <Link href="/gallery" onClick={onNavigate} className="navigation-link">
-          Gallery
-        </Link>
-      ) : null}
+      {links.map(([href, label]) => {
+        const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
+        return (
+          <Link key={href} href={href} onClick={onNavigate} className={`navigation-link ${active ? "navigation-link-active" : ""}`} aria-current={active ? "page" : undefined}>
+            {label}
+          </Link>
+        );
+      })}
     </>
   );
 }
 
 export default function Layout({ children }) {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef(null);
   const closeButtonRef = useRef(null);
   const menuRef = useRef(null);
@@ -99,6 +74,13 @@ export default function Layout({ children }) {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 12);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const closeMenu = () => setMenuOpen(false);
   const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(
     "Hello Imperion, I would like to discuss Kenyan coffee."
@@ -109,7 +91,7 @@ export default function Layout({ children }) {
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
-      <header className="sticky top-0 z-50 border-b border-forest/10 bg-ivory/95 backdrop-blur-md">
+      <header className={`sticky top-0 z-50 border-b border-forest/10 bg-ivory/95 backdrop-blur-md transition-shadow ${scrolled ? "shadow-[0_8px_28px_rgba(9,47,35,.10)]" : ""}`}>
         <div className="mx-auto flex min-h-[76px] max-w-[1600px] items-center gap-5 px-4 sm:px-6 lg:px-8">
           <Link
             href="/"
@@ -125,19 +107,19 @@ export default function Layout({ children }) {
 
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-4 2xl:flex"
+            className="hidden items-center gap-3 xl:flex"
           >
-            <NavigationLinks />
+            <NavigationLinks pathname={router.pathname} />
           </nav>
 
-          <Link href="/samples" className="cta-primary hidden shrink-0 md:inline-flex">
-            Request samples
+          <Link href="/contact" className="cta-primary hidden shrink-0 md:inline-flex">
+            Request a Quote
           </Link>
           <button
             ref={menuButtonRef}
             type="button"
             onClick={() => setMenuOpen(true)}
-            className="flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5 rounded-md border border-forest/20 text-forest 2xl:hidden"
+            className="flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5 rounded-md border border-forest/20 text-forest xl:hidden"
             aria-label="Open menu"
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
@@ -153,7 +135,7 @@ export default function Layout({ children }) {
         <div
           ref={menuRef}
           id="mobile-navigation"
-          className="fixed inset-0 z-[60] overflow-y-auto bg-darkgreen text-white 2xl:hidden"
+          className="fixed inset-0 z-[60] overflow-y-auto bg-darkgreen text-white xl:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"
@@ -176,11 +158,11 @@ export default function Layout({ children }) {
             aria-label="Mobile navigation"
             className="main-navigation--mobile flex flex-col items-start gap-1 px-5 py-5"
           >
-            <NavigationLinks onNavigate={closeMenu} mobile />
+            <NavigationLinks onNavigate={closeMenu} mobile pathname={router.pathname} />
           </nav>
           <div className="grid gap-3 px-5 pb-10">
-            <Link href="/coffee" onClick={closeMenu} className="cta-primary w-full">
-              Request an offer
+            <Link href="/contact" onClick={closeMenu} className="cta-primary w-full">
+              Request a Quote
             </Link>
             <a href={`tel:${brand.phone.replace(/\s/g, "")}`} className="py-2 text-sm text-white/85">
               Call {brand.phone}
@@ -218,18 +200,18 @@ export default function Layout({ children }) {
           <div>
             <h2 className="eyebrow text-goldlight">Company</h2>
             <div className="mt-4 flex flex-col items-start gap-3 text-sm text-white/75">
-              <Link href="/about">About</Link>
+              <Link href="/about">About Us</Link>
+              <Link href="/export">Our Services</Link>
+              <Link href="/quality-traceability">Quality &amp; Compliance</Link>
               <Link href="/gallery">Gallery</Link>
-              <Link href="/contact">Contact us</Link>
             </div>
           </div>
           <div>
-            <h2 className="eyebrow text-goldlight">Kenyan coffee</h2>
+            <h2 className="eyebrow text-goldlight">Products</h2>
             <div className="mt-4 flex flex-col items-start gap-3 text-sm text-white/75">
-              {coffeeLinks.map(([href, label]) => (
-                <Link key={href} href={href}>{label}</Link>
-              ))}
-              <Link href="/samples">Request samples</Link>
+              <Link href="/coffee">Kenyan Arabica Coffee</Link>
+              <Link href="/avocado">Hass Avocado</Link>
+              <Link href="/macadamia">Macadamia</Link>
             </div>
           </div>
           <div>
@@ -239,6 +221,7 @@ export default function Layout({ children }) {
               <Link href="/export">Export and logistics</Link>
               <Link href="/macadamia">Macadamia</Link>
               <Link href="/faq">FAQ</Link>
+              <a href="https://www.linkedin.com/company/imperion-global-holdings-limited/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <Link href="/privacy-policy">Privacy policy</Link>
               <Link href="/terms">Terms and conditions</Link>
             </div>
@@ -251,6 +234,13 @@ export default function Layout({ children }) {
           </div>
         </div>
       </footer>
+      <a
+        href="#main-content"
+        className="fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-forest/15 bg-white text-lg font-bold text-forest shadow-card"
+        aria-label="Back to top"
+      >
+        ↑
+      </a>
     </div>
   );
 }
