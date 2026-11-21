@@ -53,9 +53,11 @@ export default function HomePage() {
             <p className="mt-4 max-w-2xl text-sm leading-7 text-stone">Our approach combines Kenyan sourcing networks, quality and traceability, export coordination, and long-term B2B partnerships built around clear buyer communication.</p>
             <Link href="/about" className="cta-secondary mt-7">Discover Imperion</Link>
           </div>
-          <div className="relative min-h-[380px] overflow-hidden rounded-lg bg-mist">
-            <Image src="/images/gallery/farm-sourcing-1.jpeg" alt="Coffee sourcing visit with growers in Kenya" fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-cover" />
-            <p className="absolute bottom-5 left-5 rounded-sm bg-darkgreen/90 px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] text-goldlight">Sourced in Kenya</p>
+          <div className="mx-auto w-full max-w-sm">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-mist">
+              <Image src="/images/simon-njuguna-portrait.jpeg" alt="Simon Njuguna, Managing Director of Imperion Global Holdings" fill sizes="(max-width: 1024px) 85vw, 30vw" className="object-contain object-center" />
+            </div>
+            <p className="mt-4 text-xs font-bold uppercase tracking-[0.14em] text-goldtext">Simon Njuguna · Managing Director</p>
           </div>
         </div>
       </section>
@@ -114,6 +116,43 @@ export default function HomePage() {
 
       <section className="container-shell py-16 sm:py-20">
         <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center"><div><p className="section-label">Export &amp; Logistics</p><h2 className="section-title">Prepared for the buyer's requirements</h2><p className="section-copy">From export preparation and packaging coordination to quality documentation and buyer specifications, we keep commercial communication clear.</p></div><div className="grid gap-4 sm:grid-cols-2">{["Export preparation","Packaging coordination","Quality documentation","Buyer specifications","FOB Mombasa support where applicable","Shipment coordination"].map(item => <p key={item} className="border border-forest/10 bg-white p-5 text-sm font-bold text-forest">{item}</p>)}</div></div>
+      </section>
+
+      <section className="bg-beige/70">
+        <div className="container-shell py-16 sm:py-20">
+          <p className="section-label">Successful Shipments</p>
+          <h2 className="section-title">Delivered to Dubai, now being roasted</h2>
+          <p className="section-copy">The coffee shown here was delivered to Dubai, where the customer is roasting it.</p>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[1, 2, 3, 4].map((number) => (
+              <article key={number} className="overflow-hidden border border-forest/10 bg-white">
+                <video className="aspect-[4/3] w-full bg-black object-contain" controls playsInline preload="metadata" aria-label={`Customer roasting coffee delivered to Dubai, video ${number}`}>
+                  <source src={`/videos/dubai-delivery-roasting-${number}.mp4`} type="video/mp4" />
+                  Your browser does not support embedded video.
+                </video>
+                <p className="p-4 text-sm font-semibold text-forest">Dubai delivery · Video {number}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="container-shell py-16 sm:py-20">
+        <p className="section-label">Accredited by</p>
+        <h2 className="section-title">Accredited by relevant Kenyan institutions and marks</h2>
+        <p className="section-copy">Imperion is accredited by the Agriculture and Food Authority (AFA), the Kenya Plant Health Inspectorate Service (KEPHIS), KenTrade, and the Made in Kenya mark.</p>
+        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+          {[
+            ["Agriculture and Food Authority (AFA)", "/images/institutions/agriculture-food-authority.png"],
+            ["Kenya Plant Health Inspectorate Service (KEPHIS)", "/images/institutions/kephis.jpg"],
+            ["Made in Kenya mark", "/images/institutions/made-in-kenya.png"],
+            ["Kenya Trade Network Agency (KenTrade)", "/images/institutions/kentrade.png"],
+          ].map(([name, src]) => (
+            <div key={name} className="flex min-h-32 items-center justify-center border border-forest/10 bg-white p-5">
+              <Image src={src} alt={name} width={220} height={110} sizes="(max-width: 768px) 45vw, 20vw" className="max-h-24 w-full object-contain" />
+            </div>
+          ))}
+        </div>
       </section>
 
       <GallerySlides />

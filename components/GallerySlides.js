@@ -38,6 +38,27 @@ const slides = [
     description: "Reviewing green coffee samples side by side.",
   },
   {
+    type: "image",
+    src: "/images/events/africa-food-show-opening-ceremony.jpeg",
+    alt: "Delegates at the Africa Food Show Kenya opening ceremony",
+    title: "Africa Food Show Kenya",
+    description: "A moment from the opening ceremony at an agricultural trade event.",
+  },
+  {
+    type: "video",
+    src: "/videos/shamba-coffee-event.mp4",
+    poster: "/images/events/coffee-origin-event-10.jpeg",
+    title: "Shamba event",
+    description: "Event footage from a gathering connected with coffee and agriculture.",
+  },
+  {
+    type: "video",
+    src: "/videos/coffee-cupping-evaluation.mp4",
+    poster: "/images/gallery/cupping-session.jpg",
+    title: "Coffee sample evaluation",
+    description: "A closer look at coffee evaluation and the cupping process.",
+  },
+  {
     type: "video",
     src: "/videos/coffee-work-2026-09.mp4",
     poster: "/images/gallery/farm-sourcing-1.jpeg",

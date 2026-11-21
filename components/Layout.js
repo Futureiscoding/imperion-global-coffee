@@ -107,19 +107,19 @@ export default function Layout({ children }) {
 
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-3 xl:flex"
+            className="hidden items-center gap-2 lg:flex"
           >
             <NavigationLinks pathname={router.pathname} />
           </nav>
 
-          <Link href="/contact" className="cta-primary hidden shrink-0 md:inline-flex">
+          <Link href="/contact" className="cta-primary hidden shrink-0 lg:inline-flex">
             Request a Quote
           </Link>
           <button
             ref={menuButtonRef}
             type="button"
             onClick={() => setMenuOpen(true)}
-            className="flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5 rounded-md border border-forest/20 text-forest xl:hidden"
+            className="flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5 rounded-md border border-forest/20 text-forest lg:hidden"
             aria-label="Open menu"
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
@@ -135,7 +135,7 @@ export default function Layout({ children }) {
         <div
           ref={menuRef}
           id="mobile-navigation"
-          className="fixed inset-0 z-[60] overflow-y-auto bg-darkgreen text-white xl:hidden"
+          className="fixed inset-0 z-[60] overflow-y-auto bg-darkgreen text-white lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"
@@ -201,7 +201,7 @@ export default function Layout({ children }) {
             <h2 className="eyebrow text-goldlight">Company</h2>
             <div className="mt-4 flex flex-col items-start gap-3 text-sm text-white/75">
               <Link href="/about">About Us</Link>
-              <Link href="/export">Our Services</Link>
+              <Link href="/services">Our Services</Link>
               <Link href="/quality-traceability">Quality &amp; Compliance</Link>
               <Link href="/gallery">Gallery</Link>
             </div>
