@@ -19,7 +19,6 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      { source: "/:path*", destination: "https://imperionglobalholdings.co.ke/:path*", permanent: true, has: [{ type: "host", value: "www.imperionglobalholdings.co.ke" }] },
       { source: "/coffee/current-lots", destination: "/coffee", permanent: true },
       { source: "/coffee/catalog", destination: "/coffee", permanent: true },
       { source: "/how-to-buy", destination: "/export", permanent: true },
